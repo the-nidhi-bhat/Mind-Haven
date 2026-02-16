@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <title>Sand Draw | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="sand-draw.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+        <div style="color: white; font-weight: 700;">Sand Draw</div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="controls">
+        <button class="control-btn" onclick="clearGrid()">
+            <i class="fas fa-eraser"></i> Clear
+        </button>
+        <button class="control-btn" onclick="saveArt()">
+            <i class="fas fa-download"></i> Save
+        </button>
+    </div>
+
+    <div class="brush-size">
+        <label>Brush Size</label>
+        <input type="range" id="brushSize" min="1" max="10" value="3">
+    </div>
+
+    <div class="material-palette">
+        <div class="material-btn active" style="background: #f4a460;" data-type="sand">
+            <div class="material-label">Sand</div>
+        </div>
+        <div class="material-btn" style="background: #4a90e2;" data-type="water">
+            💧
+            <div class="material-label">Water</div>
+        </div>
+        <div class="material-btn" style="background: #8b4513;" data-type="wall">
+            🧱
+            <div class="material-label">Wall</div>
+        </div>
+        <div class="material-btn" style="background: linear-gradient(45deg, #ff6b6b, #feca57);" data-type="fire">
+            🔥
+            <div class="material-label">Fire</div>
+        </div>
+        <div class="material-btn" style="background: #2ecc71;" data-type="plant">
+            🌱
+            <div class="material-label">Plant</div>
+        </div>
+        <div class="material-btn" style="background: #95a5a6;" data-type="stone">
+            🪨
+            <div class="material-label">Stone</div>
+        </div>
+    </div>
+
+    <script src="sand-draw.js"></script>
+</body>
+
+</html>

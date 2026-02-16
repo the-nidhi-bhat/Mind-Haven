@@ -1,0 +1,289 @@
+:root {
+    /* Light Mode */
+    --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+    --sage-dark: #5a6b56;
+    --sage-light: #e8f3e5;
+    --lavender: #d4c5e8;
+    --bg-primary: #f9fafb;
+    --bg-secondary: #ffffff;
+    --text-dark: #111827;
+    --text-muted: #6b7280;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --border-light: #e5e7eb;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --glass: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode */
+    --sage-gradient: linear-gradient(135deg, #1a1d2e 0%, #1f2937 100%);
+    --sage-dark: #94a3b8;
+    --sage-light: #1e293b;
+    --lavender: #6366f1;
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a1d2e;
+    --text-dark: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent: #8b5cf6;
+    --accent-soft: #312e81;
+    --border-light: #2d3748;
+    --glass-bg: rgba(26, 29, 46, 0.9);
+    --glass: rgba(0, 0, 0, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--sage-gradient);
+    color: var(--text-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.5s ease;
+}
+
+.header-bar {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 100;
+}
+
+.back-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--glass);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateX(-5px);
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Breathing Circle */
+.breath-wrapper {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.breath-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Animation States */
+.breath-circle.inhale {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(99, 219, 255, 0.3), rgba(99, 102, 241, 0.1));
+    border-color: rgba(99, 219, 255, 0.6);
+    box-shadow: 0 0 80px rgba(99, 219, 255, 0.4);
+}
+
+.breath-circle.exhale {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.3), rgba(139, 92, 246, 0.1));
+    border-color: rgba(167, 139, 250, 0.6);
+    box-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
+}
+
+.breath-circle.hold-in {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.3), rgba(236, 72, 153, 0.1));
+    border-color: rgba(244, 114, 182, 0.6);
+    box-shadow: 0 0 60px rgba(236, 72, 153, 0.3);
+}
+
+.breath-circle.hold-out {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.3), rgba(236, 72, 153, 0.1));
+    border-color: rgba(244, 114, 182, 0.6);
+    box-shadow: 0 0 60px rgba(236, 72, 153, 0.3);
+}
+
+.breath-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.instruction {
+    margin-top: 50px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-align: center;
+    opacity: 0.9;
+    height: 40px;
+    transition: opacity 0.3s;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .instruction {
+    text-shadow: none;
+}
+
+.controls {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    gap: 15px;
+    background: var(--glass);
+    padding: 8px;
+    border-radius: 60px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn {
+    background: transparent;
+    color: var(--text-dark);
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.control-btn.active {
+    background: var(--bg-secondary);
+    color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .control-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+.stats {
+    position: absolute;
+    top: 100px;
+    display: flex;
+    gap: 40px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: 'Playfair Display', serif;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    opacity: 0.7;
+    margin-top: 8px;
+    color: var(--text-dark);
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    animation: rippleEffect 0.8s ease-out forwards;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@keyframes rippleEffect {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+        border-width: 4px;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+        border-width: 0px;
+    }
+}

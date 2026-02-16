@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrate Wins | Mindful Haven</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sage-gradient: linear-gradient(135deg, #a3b899 0%, #c9b3d4 100%);
+            --sage-dark: #5a6b56;
+            --sage-bg: #f9fbf8;
+            --white: #ffffff;
+            --nav-text: #4a4a4a;
+            --support-black: #1a1a1a;
+
+            --win-big: #ffd700;
+            --win-small: #c8e6c9;
+        }
+
+        [data-theme="dark"] {
+            --sage-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --sage-dark: #94a3b8;
+            --sage-bg: #0f172a;
+            --white: #1e293b;
+            --nav-text: #f1f5f9;
+            --support-black: #f1f5f9;
+        }
+
+        /* Shared Leaf Opacity for Dark Mode */
+        [data-theme="dark"] .leaf-left-hero,
+        [data-theme="dark"] .leaf-right-hero,
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section,
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--sage-bg);
+            color: #333;
+            padding-bottom: 120px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            background: var(--white);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .support-pill {
+            background: var(--support-black);
+            color: var(--white) !important;
+            padding: 10px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .hero-container {
+            padding: 40px 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card {
+            background: var(--sage-gradient);
+            border-radius: 40px;
+            padding: 50px 60px;
+            box-shadow: 0 25px 50px rgba(90, 107, 86, 0.15);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-card h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .hero-card p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        /* LEAVES - HERO */
+        .leaf-left-hero,
+        .leaf-right-hero {
+            position: absolute;
+            opacity: 0.14;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .leaf-left-hero {
+            left: -50px;
+            top: 12%;
+            width: 210px;
+            height: 320px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M50,60 Q80,110 50,160 T50,260 T50,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="72" cy="85" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(-18 72 85)"/><ellipse cx="32" cy="140" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(12 32 140)"/><ellipse cx="68" cy="210" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(-24 68 210)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-hero {
+            right: -60px;
+            top: 18%;
+            width: 230px;
+            height: 330px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M150,60 Q120,110 150,160 T150,260 T150,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="128" cy="90" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(16 128 90)"/><ellipse cx="170" cy="145" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(-14 170 145)"/><ellipse cx="138" cy="215" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(22 138 215)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - CONTENT SECTIONS */
+        .leaf-left-section,
+        .leaf-right-section {
+            position: absolute;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section {
+            opacity: 0.06;
+        }
+
+        .leaf-left-section {
+            left: -40px;
+            top: 10%;
+            width: 160px;
+            height: 240px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 300"><ellipse cx="55" cy="60" rx="25" ry="12" fill="%2387a383" opacity="0.6" transform="rotate(-15 55 60)"/><path d="M40,80 Q65,120 40,170 T40,260" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="50" cy="130" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(12 50 130)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-section {
+            right: -40px;
+            top: 20%;
+            width: 180px;
+            height: 260px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 300"><ellipse cx="125" cy="70" rx="28" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(18 125 70)"/><path d="M140,90 Q115,130 140,180 T140,270" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="130" cy="150" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(-14 130 150)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - BOTTOM SECTIONS */
+        .leaf-left-bottom,
+        .leaf-right-bottom {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        .leaf-left-bottom {
+            left: -30px;
+            bottom: 15%;
+            width: 140px;
+            height: 220px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 280"><ellipse cx="50" cy="50" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-20 50 50)"/><path d="M35,70 Q55,110 35,150 T35,230" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="45" cy="120" rx="20" ry="9" fill="%2387a383" opacity="0.6" transform="rotate(10 45 120)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-bottom {
+            right: -30px;
+            bottom: 10%;
+            width: 150px;
+            height: 230px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 280"><ellipse cx="110" cy="60" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(22 110 60)"/><path d="M120,80 Q100,120 120,160 T120,240" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="115" cy="140" rx="21" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-16 115 140)"/></svg>') no-repeat center/contain;
+        }
+
+        .input-box {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 25px 30px;
+            margin-top: 20px;
+        }
+
+        .win-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 15px;
+            border: none;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .win-type-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .type-btn {
+            padding: 10px 25px;
+            border-radius: 20px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .type-btn.active {
+            background: white;
+            color: var(--sage-dark);
+        }
+
+        .add-btn {
+            background: white;
+            color: var(--sage-dark);
+            padding: 14px 35px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 25px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--sage-dark);
+        }
+
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .win-item {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 25px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .win-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .win-item.big {
+            border-left: 5px solid var(--win-big);
+        }
+
+        .win-item.small {
+            border-left: 5px solid var(--win-small);
+        }
+
+        .win-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .win-badge {
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .win-badge.big {
+            background: var(--win-big);
+            color: #856404;
+        }
+
+        .win-badge.small {
+            background: var(--win-small);
+            color: #2e7d32;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.1);
+            background: #dc2626;
+        }
+
+        .win-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .win-date {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: none;
+            justify-content: space-around;
+            padding: 20px 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        @media (max-width: 1000px) {
+            .hero-card {
+                padding: 40px 30px;
+            }
+
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+        <ul class="nav-links">
+            <li><a href="journey.html">Home</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="positivity.html">Positivity</a></li>
+        </ul>
+        <div class="nav-right" style="display:flex; gap:16px; align-items:center;">
+            <a href="support.html" class="support-pill" style="text-decoration:none; font-size:0.95rem;">Support</a>
+            <div class="theme-toggle" id="themeToggle"
+                style="cursor:pointer; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:30px; background:rgba(0,0,0,0.05);">
+                <i class="fas fa-sun"></i>
+                <span id="themeLabel">Light</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="leaf-left-hero"></div>
+        <div class="leaf-right-hero"></div>
+        <div class="hero-card">
+            <p
+                style="text-transform:uppercase; font-weight:800; font-size:0.8rem; letter-spacing:2px; color:rgba(255,255,255,0.8);">
+                🎉 You're Amazing 🎉</p>
+            <h1>Celebrate Your Wins</h1>
+            <p>Every achievement matters - big or small!</p>
+
+            <div class="input-box">
+                <input type="text" class="win-input" id="winInput" placeholder="What did you accomplish today?">
+                <div class="win-type-btns">
+                    <button class="type-btn active" id="bigBtn" onclick="selectType('big')">🏆 Big Win</button>
+                    <button class="type-btn" id="smallBtn" onclick="selectType('small')">⭐ Small Win</button>
+                </div>
+                <button class="add-btn" onclick="addWin()">Add Win</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="leaf-left-section"></div>
+        <div class="leaf-right-section"></div>
+        <div class="leaf-left-bottom"></div>
+        <div class="leaf-right-bottom"></div>
+        <div class="sec-title"><i class="fas fa-trophy"></i> Your Wins (<span id="winCount">0</span>)</div>
+        <div class="wins-grid" id="winsList"></div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="journey.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-home"
+                style="display:block; font-size:1.4rem;"></i>Home</a>
+        <a href="crisis.html"
+            style="background:#ef4444; width:55px; height:55px; border-radius:50%; margin-top:-35px; display:flex; align-items:center; justify-content:center; color:white; font-weight:800; text-decoration:none;">
+            SOS</a>
+        <a href="positivity.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-smile"
+                style="display:block; font-size:1.4rem;"></i>Back</a>
+    </div>
+
+    <script>
+        // Theme Logic
+        function syncTheme() {
+            const saved = localStorage.getItem('mh_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            const btn = document.getElementById('themeToggle');
+            const icon = btn.querySelector('i');
+            const text = btn.querySelector('span');
+            if (saved === 'dark') {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark';
+            } else {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light';
+            }
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function () {
+            const html = document.documentElement;
+            const curr = html.getAttribute('data-theme');
+            const next = curr === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('mh_theme', next);
+            syncTheme();
+        });
+
+        syncTheme();
+
+        let selectedType = 'big';
+        let winsData = JSON.parse(localStorage.getItem('mh_wins')) || [];
+
+        function selectType(type) {
+            selectedType = type;
+            document.getElementById('bigBtn').classList.toggle('active', type === 'big');
+            document.getElementById('smallBtn').classList.toggle('active', type === 'small');
+        }
+
+        function addWin() {
+            const input = document.getElementById('winInput');
+            const text = input.value.trim();
+
+            if (!text) {
+                alert('Please write your win! 💪');
+                return;
+            }
+
+            winsData.unshift({
+                text: text,
+                type: selectedType,
+                date: new Date().toLocaleDateString(),
+                timestamp: new Date().toISOString()
+            });
+
+            localStorage.setItem('mh_wins', JSON.stringify(winsData));
+            input.value = '';
+
+            alert('🎉 WIN ADDED! 🎉\n\nYou\'re doing amazing! Keep going! 💪✨');
+            renderWins();
+        }
+
+        function deleteWin(index) {
+            if (confirm('Are you sure you want to delete this win?')) {
+                winsData.splice(index, 1);
+                localStorage.setItem('mh_wins', JSON.stringify(winsData));
+                renderWins();
+            }
+        }
+
+        function renderWins() {
+            const list = document.getElementById('winsList');
+            document.getElementById('winCount').textContent = winsData.length;
+
+            if (winsData.length === 0) {
+                list.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#999;">No wins yet. Add your first achievement! 🌟</p>';
+                return;
+            }
+
+            list.innerHTML = winsData.map((win, index) => `
+            <div class="win-item ${win.type}">
+                <div class="win-header">
+                    <span class="win-badge ${win.type}">${win.type === 'big' ? '🏆 Big Win' : '⭐ Small Win'}</span>
+                    <button class="delete-btn" onclick="deleteWin(${index})" title="Delete win">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="win-text">${win.text}</div>
+                <div class="win-date">${win.date}</div>
+            </div>
+        `).join('');
+        }
+
+        document.getElementById('winInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') addWin();
+        });
+
+        renderWins();
+    </script>
+
+</body>
+
+</html>

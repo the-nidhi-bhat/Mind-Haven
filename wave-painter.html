@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wave Painter | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="wave-painter.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+        <div style="font-weight: 700; font-size: 1.1rem;">Wave Painter</div>
+    </div>
+
+    <div class="info-panel">
+        <div class="info-text">🌊 Paint flowing waves with your cursor</div>
+    </div>
+
+    <div class="game-container">
+        <div class="canvas-wrapper">
+            <canvas id="waveCanvas"></canvas>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <div class="color-picker active" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"
+                onclick="setColor('purple')" data-color="purple"></div>
+            <div class="color-picker" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);"
+                onclick="setColor('blue')" data-color="blue"></div>
+            <div class="color-picker" style="background: linear-gradient(135deg, #10b981, #34d399);"
+                onclick="setColor('green')" data-color="green"></div>
+            <div class="color-picker" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"
+                onclick="setColor('yellow')" data-color="yellow"></div>
+            <div class="color-picker" style="background: linear-gradient(135deg, #ec4899, #f472b6);"
+                onclick="setColor('pink')" data-color="pink"></div>
+            <div class="color-picker" style="background: linear-gradient(135deg, #c9dcc4, #d4c5e8);"
+                onclick="setColor('sage')" data-color="sage"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="control-group">
+            <button class="btn active" onclick="setMode('calm')" id="btn-calm">
+                <i class="fas fa-water"></i> Calm
+            </button>
+            <button class="btn" onclick="setMode('flow')" id="btn-flow">
+                <i class="fas fa-wind"></i> Flow
+            </button>
+            <button class="btn" onclick="setMode('energy')" id="btn-energy">
+                <i class="fas fa-bolt"></i> Energy
+            </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <button class="btn" onclick="clearCanvas()">
+            <i class="fas fa-redo"></i> Clear
+        </button>
+    </div>
+
+    <script src="wave-painter.js"></script>
+</body>
+
+</html>

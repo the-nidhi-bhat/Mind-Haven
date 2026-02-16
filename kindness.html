@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindness Challenge | Mindful Haven</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sage-gradient: linear-gradient(135deg, #a3b899 0%, #c9b3d4 100%);
+            --sage-dark: #5a6b56;
+            --sage-bg: #f9fbf8;
+            --white: #ffffff;
+            --nav-text: #4a4a4a;
+            --support-black: #1a1a1a;
+        }
+
+        [data-theme="dark"] {
+            --sage-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --sage-dark: #94a3b8;
+            --sage-bg: #0f172a;
+            --white: #1e293b;
+            --nav-text: #f1f5f9;
+            --support-black: #f1f5f9;
+        }
+
+        /* Shared Leaf Opacity for Dark Mode */
+        [data-theme="dark"] .leaf-left-hero,
+        [data-theme="dark"] .leaf-right-hero,
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section,
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--sage-bg);
+            color: #333;
+            padding-bottom: 120px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            background: var(--white);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .support-pill {
+            background: var(--support-black);
+            color: var(--white) !important;
+            padding: 10px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .hero-container {
+            padding: 40px 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card {
+            background: var(--sage-gradient);
+            border-radius: 40px;
+            padding: 50px 60px;
+            box-shadow: 0 25px 50px rgba(90, 107, 86, 0.15);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-card h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .hero-card p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        /* LEAVES - HERO */
+        .leaf-left-hero,
+        .leaf-right-hero {
+            position: absolute;
+            opacity: 0.14;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .leaf-left-hero {
+            left: -50px;
+            top: 12%;
+            width: 210px;
+            height: 320px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M50,60 Q80,110 50,160 T50,260 T50,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="72" cy="85" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(-18 72 85)"/><ellipse cx="32" cy="140" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(12 32 140)"/><ellipse cx="68" cy="210" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(-24 68 210)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-hero {
+            right: -60px;
+            top: 18%;
+            width: 230px;
+            height: 330px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M150,60 Q120,110 150,160 T150,260 T150,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="128" cy="90" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(16 128 90)"/><ellipse cx="170" cy="145" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(-14 170 145)"/><ellipse cx="138" cy="215" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(22 138 215)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - CONTENT SECTIONS */
+        .leaf-left-section,
+        .leaf-right-section {
+            position: absolute;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section {
+            opacity: 0.06;
+        }
+
+        .leaf-left-section {
+            left: -40px;
+            top: 10%;
+            width: 160px;
+            height: 240px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 300"><ellipse cx="55" cy="60" rx="25" ry="12" fill="%2387a383" opacity="0.6" transform="rotate(-15 55 60)"/><path d="M40,80 Q65,120 40,170 T40,260" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="50" cy="130" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(12 50 130)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-section {
+            right: -40px;
+            top: 20%;
+            width: 180px;
+            height: 260px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 300"><ellipse cx="125" cy="70" rx="28" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(18 125 70)"/><path d="M140,90 Q115,130 140,180 T140,270" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="130" cy="150" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(-14 130 150)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - BOTTOM SECTIONS */
+        .leaf-left-bottom,
+        .leaf-right-bottom {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        .leaf-left-bottom {
+            left: -30px;
+            bottom: 15%;
+            width: 140px;
+            height: 220px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 280"><ellipse cx="50" cy="50" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-20 50 50)"/><path d="M35,70 Q55,110 35,150 T35,230" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="45" cy="120" rx="20" ry="9" fill="%2387a383" opacity="0.6" transform="rotate(10 45 120)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-bottom {
+            right: -30px;
+            bottom: 10%;
+            width: 150px;
+            height: 230px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 280"><ellipse cx="110" cy="60" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(22 110 60)"/><path d="M120,80 Q100,120 120,160 T120,240" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="115" cy="140" rx="21" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-16 115 140)"/></svg>') no-repeat center/contain;
+        }
+
+        .challenge-box {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 30px 40px;
+            margin-top: 20px;
+        }
+
+        .challenge-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .complete-btn {
+            background: white;
+            color: var(--sage-dark);
+            padding: 14px 35px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .complete-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content-area {
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 25px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--sage-dark);
+        }
+
+        .kindness-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .kindness-item {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .kindness-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-color: #a3b899;
+        }
+
+        .kindness-item.completed {
+            opacity: 0.6;
+            background: #f0f4ee;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: #f4f7f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sage-dark);
+            font-size: 1.3rem;
+        }
+
+        .icon-box.completed {
+            background: #d4edda;
+            color: #2e7d32;
+        }
+
+        .txt h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .txt p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .date-tag {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: none;
+            justify-content: space-around;
+            padding: 20px 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        @media (max-width: 1000px) {
+            .hero-card {
+                padding: 40px 30px;
+            }
+
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+        <ul class="nav-links">
+            <li><a href="journey.html">Home</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="positivity.html">Positivity</a></li>
+        </ul>
+        <div class="nav-right" style="display:flex; gap:16px; align-items:center;">
+            <a href="support.html" class="support-pill" style="text-decoration:none; font-size:0.95rem;">Support</a>
+            <div class="theme-toggle" id="themeToggle"
+                style="cursor:pointer; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:30px; background:rgba(0,0,0,0.05);">
+                <i class="fas fa-sun"></i>
+                <span id="themeLabel">Light</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="leaf-left-hero"></div>
+        <div class="leaf-right-hero"></div>
+        <div class="hero-card">
+            <p
+                style="text-transform:uppercase; font-weight:800; font-size:0.8rem; letter-spacing:2px; color:rgba(255,255,255,0.8);">
+                🌟 Today's Challenge 🌟</p>
+            <h1>Spread Kindness</h1>
+            <p>Small acts create big ripples of positivity</p>
+
+            <div class="challenge-box">
+                <div class="challenge-text" id="todayChallenge">Compliment someone genuinely</div>
+                <button class="complete-btn" onclick="completeChallenge()">✓ Mark as Complete</button>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="streakCount">0</div>
+                    <div class="stat-label">Day Streak 🔥</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalCount">0</div>
+                    <div class="stat-label">Kind Acts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="weekCount">0</div>
+                    <div class="stat-label">This Week</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="leaf-left-section"></div>
+        <div class="leaf-right-section"></div>
+        <div class="leaf-left-bottom"></div>
+        <div class="leaf-right-bottom"></div>
+        <div class="sec-title"><i class="fas fa-history"></i> Your Kindness Journey</div>
+        <div class="kindness-grid" id="historyList"></div>
+
+        <div class="sec-title"><i class="fas fa-lightbulb"></i> Challenge Ideas</div>
+        <div class="kindness-grid">
+            <div class="kindness-item" onclick="setChallenge('Compliment someone genuinely')">
+                <div class="icon-box"><i class="fas fa-comment-dots"></i></div>
+                <div class="txt">
+                    <h4>Give a Compliment</h4>
+                    <p>Make someone's day with genuine praise</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Help a friend with their work')">
+                <div class="icon-box"><i class="fas fa-hands-helping"></i></div>
+                <div class="txt">
+                    <h4>Offer Help</h4>
+                    <p>Assist someone who needs support</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Send a thank you message')">
+                <div class="icon-box"><i class="fas fa-envelope-open-text"></i></div>
+                <div class="txt">
+                    <h4>Express Gratitude</h4>
+                    <p>Thank someone who helped you</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Share your snacks or lunch')">
+                <div class="icon-box"><i class="fas fa-cookie-bite"></i></div>
+                <div class="txt">
+                    <h4>Share Food</h4>
+                    <p>Sharing a meal brings people together</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Listen without interrupting')">
+                <div class="icon-box"><i class="fas fa-ear-listen"></i></div>
+                <div class="txt">
+                    <h4>Active Listening</h4>
+                    <p>Give someone your full attention</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Clean up someone else\'s mess')">
+                <div class="icon-box"><i class="fas fa-broom"></i></div>
+                <div class="txt">
+                    <h4>Clean Up</h4>
+                    <p>Make shared spaces better</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Smile at 5 strangers')">
+                <div class="icon-box"><i class="fas fa-smile"></i></div>
+                <div class="txt">
+                    <h4>Share Smiles</h4>
+                    <p>A smile is contagious</p>
+                </div>
+            </div>
+            <div class="kindness-item" onclick="setChallenge('Donate something you don\'t need')">
+                <div class="icon-box"><i class="fas fa-gift"></i></div>
+                <div class="txt">
+                    <h4>Donate</h4>
+                    <p>Give away items to those in need</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="journey.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-home"
+                style="display:block; font-size:1.4rem;"></i>Home</a>
+        <div
+            style="background:#ef4444; width:55px; height:55px; border-radius:50%; margin-top:-35px; display:flex; align-items:center; justify-content:center; color:white; font-weight:800;">
+            SOS</div>
+        <a href="positivity.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-smile"
+                style="display:block; font-size:1.4rem;"></i>Back</a>
+    </div>
+
+    <script>
+        // Theme Logic
+        function syncTheme() {
+            const saved = localStorage.getItem('mh_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            const btn = document.getElementById('themeToggle');
+            const icon = btn.querySelector('i');
+            const text = btn.querySelector('span');
+            if (saved === 'dark') {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark';
+            } else {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light';
+            }
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function () {
+            const html = document.documentElement;
+            const curr = html.getAttribute('data-theme');
+            const next = curr === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('mh_theme', next);
+            syncTheme();
+        });
+
+        syncTheme();
+
+        const challenges = [
+            "Compliment someone genuinely",
+            "Help a friend with their work",
+            "Send a thank you message",
+            "Share your snacks or lunch",
+            "Listen without interrupting",
+            "Clean up someone else's mess",
+            "Smile at 5 strangers",
+            "Hold the door open for someone",
+            "Donate something you don't need",
+            "Call a friend you haven't talked to"
+        ];
+
+        let kindnessData = JSON.parse(localStorage.getItem('mh_kindness')) || {
+            history: [],
+            streak: 0,
+            total: 0,
+            lastDate: null
+        };
+
+        function loadStats() {
+            document.getElementById('streakCount').textContent = kindnessData.streak;
+            document.getElementById('totalCount').textContent = kindnessData.total;
+
+            const today = new Date().toDateString();
+            const thisWeek = kindnessData.history.filter(item => {
+                const itemDate = new Date(item.date);
+                const diffDays = Math.floor((new Date() - itemDate) / (1000 * 60 * 60 * 24));
+                return diffDays < 7;
+            }).length;
+            document.getElementById('weekCount').textContent = thisWeek;
+        }
+
+        function loadDailyChallenge() {
+            const today = new Date().getDate();
+            const challenge = challenges[today % challenges.length];
+            document.getElementById('todayChallenge').textContent = challenge;
+        }
+
+        function setChallenge(text) {
+            document.getElementById('todayChallenge').textContent = text;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function completeChallenge() {
+            const challenge = document.getElementById('todayChallenge').textContent;
+            const today = new Date().toDateString();
+
+            if (kindnessData.history.length > 0 && kindnessData.history[0].date === today) {
+                alert('You already completed a challenge today! 🌟\n\nCome back tomorrow for more kindness!');
+                return;
+            }
+
+            kindnessData.history.unshift({
+                challenge: challenge,
+                date: today,
+                timestamp: new Date().toISOString()
+            });
+
+            kindnessData.total++;
+
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            if (kindnessData.lastDate === yesterday.toDateString()) {
+                kindnessData.streak++;
+            } else if (kindnessData.lastDate !== today) {
+                kindnessData.streak = 1;
+            }
+            kindnessData.lastDate = today;
+
+            localStorage.setItem('mh_kindness', JSON.stringify(kindnessData));
+
+            alert('🎉 Amazing! Challenge Complete! 🎉\n\nYou just made the world a little brighter! ✨');
+
+            loadStats();
+            renderHistory();
+            loadDailyChallenge();
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            if (kindnessData.history.length === 0) {
+                list.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#999;">No challenges completed yet. Start spreading kindness today! 🌟</p>';
+                return;
+            }
+
+            list.innerHTML = kindnessData.history.slice(0, 10).map(item => `
+            <div class="kindness-item completed">
+                <div class="icon-box completed"><i class="fas fa-check"></i></div>
+                <div class="txt">
+                    <h4>${item.challenge}</h4>
+                    <p class="date-tag">${item.date}</p>
+                </div>
+            </div>
+        `).join('');
+        }
+
+        loadStats();
+        loadDailyChallenge();
+        renderHistory();
+    </script>
+
+</body>
+
+</html>

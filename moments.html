@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Moments | Mindful Haven</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --sage-gradient: linear-gradient(135deg, #a3b899 0%, #c9b3d4 100%);
+            --sage-dark: #5a6b56;
+            --sage-bg: #f9fbf8;
+            --white: #ffffff;
+            --nav-text: #4a4a4a;
+            --support-black: #1a1a1a;
+        }
+
+        [data-theme="dark"] {
+            --sage-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --sage-dark: #94a3b8;
+            --sage-bg: #0f172a;
+            --white: #1e293b;
+            --nav-text: #f1f5f9;
+            --support-black: #f1f5f9;
+        }
+
+        /* Shared Leaf Opacity for Dark Mode */
+        [data-theme="dark"] .leaf-left-hero,
+        [data-theme="dark"] .leaf-right-hero,
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section,
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--sage-bg);
+            color: #333;
+            padding-bottom: 120px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            background: var(--white);
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--sage-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .support-pill {
+            background: var(--support-black);
+            color: var(--white) !important;
+            padding: 10px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .hero-container {
+            padding: 40px 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card {
+            background: var(--sage-gradient);
+            border-radius: 40px;
+            padding: 50px 60px;
+            box-shadow: 0 25px 50px rgba(90, 107, 86, 0.15);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-card h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .hero-card p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        /* LEAVES - HERO */
+        .leaf-left-hero,
+        .leaf-right-hero {
+            position: absolute;
+            opacity: 0.14;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .leaf-left-hero {
+            left: -50px;
+            top: 12%;
+            width: 210px;
+            height: 320px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M50,60 Q80,110 50,160 T50,260 T50,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="72" cy="85" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(-18 72 85)"/><ellipse cx="32" cy="140" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(12 32 140)"/><ellipse cx="68" cy="210" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(-24 68 210)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-hero {
+            right: -60px;
+            top: 18%;
+            width: 230px;
+            height: 330px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M150,60 Q120,110 150,160 T150,260 T150,350" stroke="%2387a383" stroke-width="4" fill="none" opacity="0.5"/><ellipse cx="128" cy="90" rx="30" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(16 128 90)"/><ellipse cx="170" cy="145" rx="34" ry="18" fill="%2387a383" opacity="0.6" transform="rotate(-14 170 145)"/><ellipse cx="138" cy="215" rx="28" ry="15" fill="%2387a383" opacity="0.6" transform="rotate(22 138 215)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - CONTENT SECTIONS */
+        .leaf-left-section,
+        .leaf-right-section {
+            position: absolute;
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-section,
+        [data-theme="dark"] .leaf-right-section {
+            opacity: 0.06;
+        }
+
+        .leaf-left-section {
+            left: -40px;
+            top: 10%;
+            width: 160px;
+            height: 240px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 300"><ellipse cx="55" cy="60" rx="25" ry="12" fill="%2387a383" opacity="0.6" transform="rotate(-15 55 60)"/><path d="M40,80 Q65,120 40,170 T40,260" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="50" cy="130" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(12 50 130)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-section {
+            right: -40px;
+            top: 20%;
+            width: 180px;
+            height: 260px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 300"><ellipse cx="125" cy="70" rx="28" ry="14" fill="%2387a383" opacity="0.6" transform="rotate(18 125 70)"/><path d="M140,90 Q115,130 140,180 T140,270" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="130" cy="150" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(-14 130 150)"/></svg>') no-repeat center/contain;
+        }
+
+        /* LEAVES - BOTTOM SECTIONS */
+        .leaf-left-bottom,
+        .leaf-right-bottom {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        [data-theme="dark"] .leaf-left-bottom,
+        [data-theme="dark"] .leaf-right-bottom {
+            opacity: 0.05;
+        }
+
+        .leaf-left-bottom {
+            left: -30px;
+            bottom: 15%;
+            width: 140px;
+            height: 220px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 280"><ellipse cx="50" cy="50" rx="22" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-20 50 50)"/><path d="M35,70 Q55,110 35,150 T35,230" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="45" cy="120" rx="20" ry="9" fill="%2387a383" opacity="0.6" transform="rotate(10 45 120)"/></svg>') no-repeat center/contain;
+        }
+
+        .leaf-right-bottom {
+            right: -30px;
+            bottom: 10%;
+            width: 150px;
+            height: 230px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 280"><ellipse cx="110" cy="60" rx="24" ry="11" fill="%2387a383" opacity="0.6" transform="rotate(22 110 60)"/><path d="M120,80 Q100,120 120,160 T120,240" stroke="%2387a383" stroke-width="3" fill="none" opacity="0.5"/><ellipse cx="115" cy="140" rx="21" ry="10" fill="%2387a383" opacity="0.6" transform="rotate(-16 115 140)"/></svg>') no-repeat center/contain;
+        }
+
+        .input-box {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 25px;
+            padding: 25px 30px;
+            margin-top: 20px;
+        }
+
+        .moment-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 15px;
+            border: none;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .image-upload-area {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .image-upload-area:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .image-upload-area label {
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+        }
+
+        .image-upload-area input {
+            display: none;
+        }
+
+        .preview-img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .emoji-picker {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .emoji-btn {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .emoji-btn.active {
+            border-color: white;
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .add-btn {
+            background: white;
+            color: var(--sage-dark);
+            padding: 14px 35px;
+            border-radius: 30px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sec-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0 25px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--sage-dark);
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .moment-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 0;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .moment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border-color: #a3b899;
+        }
+
+        .moment-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            opacity: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.1);
+            background: #dc2626;
+        }
+
+        .moment-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f4f7f2, #e8ede5);
+        }
+
+        .moment-content {
+            padding: 20px;
+        }
+
+        .moment-emoji {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .moment-text {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .moment-date {
+            font-size: 0.75rem;
+            color: #999;
+            text-align: right;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: none;
+            justify-content: space-around;
+            padding: 20px 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.03);
+            z-index: 1000;
+        }
+
+        @media (max-width: 1000px) {
+            .hero-card {
+                padding: 40px 30px;
+            }
+
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .bottom-nav {
+                display: flex;
+            }
+
+            .delete-btn {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+        <ul class="nav-links">
+            <li><a href="journey.html">Home</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="positivity.html">Positivity</a></li>
+        </ul>
+        <div class="nav-right" style="display:flex; gap:16px; align-items:center;">
+            <a href="support.html" class="support-pill" style="text-decoration:none; font-size:0.95rem;">Support</a>
+            <div class="theme-toggle" id="themeToggle"
+                style="cursor:pointer; display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:30px; background:rgba(0,0,0,0.05);">
+                <i class="fas fa-sun"></i>
+                <span id="themeLabel">Light</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="leaf-left-hero"></div>
+        <div class="leaf-right-hero"></div>
+        <div class="hero-card">
+            <p
+                style="text-transform:uppercase; font-weight:800; font-size:0.8rem; letter-spacing:2px; color:rgba(255,255,255,0.8);">
+                📸 Capture Joy 📸</p>
+            <h1>Happy Moments</h1>
+            <p>Collect and cherish the moments that make you smile</p>
+
+            <div class="input-box">
+                <input type="text" class="moment-input" id="momentInput" placeholder="What made you smile today?">
+
+                <div class="image-upload-area" onclick="document.getElementById('imageInput').click()">
+                    <label for="imageInput">
+                        <i class="fas fa-camera" style="font-size:2rem; display:block; margin-bottom:8px;"></i>
+                        Add Photo (Any Size)
+                    </label>
+                    <input type="file" id="imageInput" accept="image/*">
+                    <img id="imagePreview" class="preview-img" style="display:none;">
+                </div>
+
+                <div class="emoji-picker">
+                    <button type="button" class="emoji-btn active" onclick="selectEmoji('😊')">😊</button>
+                    <button type="button" class="emoji-btn" onclick="selectEmoji('😍')">😍</button>
+                    <button type="button" class="emoji-btn" onclick="selectEmoji('😌')">😌</button>
+                    <button type="button" class="emoji-btn" onclick="selectEmoji('🥰')">🥰</button>
+                    <button type="button" class="emoji-btn" onclick="selectEmoji('✨')">✨</button>
+                </div>
+                <button type="button" class="add-btn" onclick="addMoment()">📷 Capture Moment</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="leaf-left-section"></div>
+        <div class="leaf-right-section"></div>
+        <div class="leaf-left-bottom"></div>
+        <div class="leaf-right-bottom"></div>
+        <div class="sec-title"><i class="fas fa-images"></i> Your Happy Gallery (<span id="momentCount">0</span>)</div>
+        <div class="moments-grid" id="momentsList"></div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="journey.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-home"
+                style="display:block; font-size:1.4rem;"></i>Home</a>
+        <div
+            style="background:#ef4444; width:55px; height:55px; border-radius:50%; margin-top:-35px; display:flex; align-items:center; justify-content:center; color:white; font-weight:800;">
+            SOS</div>
+        <a href="positivity.html" style="text-decoration:none; color:#555; text-align:center;"><i class="fas fa-smile"
+                style="display:block; font-size:1.4rem;"></i>Back</a>
+    </div>
+
+    <script>
+        // Theme Logic
+        function syncTheme() {
+            const saved = localStorage.getItem('mh_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            const btn = document.getElementById('themeToggle');
+            const icon = btn.querySelector('i');
+            const text = btn.querySelector('span');
+            if (saved === 'dark') {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark';
+            } else {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light';
+            }
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function () {
+            const html = document.documentElement;
+            const curr = html.getAttribute('data-theme');
+            const next = curr === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('mh_theme', next);
+            syncTheme();
+        });
+
+        syncTheme();
+
+        let selectedEmoji = '😊';
+        let selectedImage = null;
+        let momentsData = [];
+
+        // Load data on page load
+        function loadData() {
+            try {
+                const stored = localStorage.getItem('mh_moments');
+                if (stored) {
+                    momentsData = JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error('Error loading data:', e);
+                momentsData = [];
+            }
+        }
+
+        function selectEmoji(emoji) {
+            selectedEmoji = emoji;
+            document.querySelectorAll('.emoji-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.trim() === emoji) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Aggressive image compression for localStorage
+        function compressImage(file, maxWidth = 600, quality = 0.6) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        // More aggressive resize - max 600px
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height = (height * maxWidth) / width;
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxWidth) {
+                                width = (width * maxWidth) / height;
+                                height = maxWidth;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Convert to compressed JPEG at 60% quality
+                        let compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+
+                        // If still too large (>200KB), compress more
+                        if (compressedBase64.length > 200000) {
+                            compressedBase64 = canvas.toDataURL('image/jpeg', 0.4);
+                        }
+
+                        // If STILL too large (>150KB), resize smaller
+                        if (compressedBase64.length > 150000) {
+                            const smallCanvas = document.createElement('canvas');
+                            smallCanvas.width = width * 0.7;
+                            smallCanvas.height = height * 0.7;
+                            const smallCtx = smallCanvas.getContext('2d');
+                            smallCtx.drawImage(canvas, 0, 0, smallCanvas.width, smallCanvas.height);
+                            compressedBase64 = smallCanvas.toDataURL('image/jpeg', 0.5);
+                        }
+
+                        console.log('Compressed image size:', (compressedBase64.length / 1024).toFixed(2), 'KB');
+                        resolve(compressedBase64);
+                    };
+                    img.onerror = reject;
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        // Handle image upload with compression
+        document.getElementById('imageInput').addEventListener('change', async function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                try {
+                    const preview = document.getElementById('imagePreview');
+                    preview.style.display = 'block';
+                    preview.alt = 'Compressing...';
+
+                    // Compress the image aggressively
+                    selectedImage = await compressImage(file, 600, 0.6);
+
+                    // Update preview
+                    preview.src = selectedImage;
+                    preview.alt = 'Preview';
+
+                } catch (error) {
+                    console.error('Error processing image:', error);
+                    alert('Error loading image. Please try again.');
+                    this.value = '';
+                    selectedImage = null;
+                }
+            }
+        });
+
+        function addMoment() {
+            const input = document.getElementById('momentInput');
+            const text = input.value.trim();
+
+            if (!text) {
+                alert('Please describe your happy moment! 😊');
+                return;
+            }
+
+            const newMoment = {
+                text: text,
+                emoji: selectedEmoji,
+                image: selectedImage,
+                date: new Date().toLocaleDateString(),
+                timestamp: new Date().toISOString()
+            };
+
+            momentsData.unshift(newMoment);
+
+            try {
+                const dataString = JSON.stringify(momentsData);
+                console.log('Total data size:', (dataString.length / 1024).toFixed(2), 'KB');
+                localStorage.setItem('mh_moments', dataString);
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+
+                // If storage full, try saving without the oldest moments
+                if (e.name === 'QuotaExceededError') {
+                    momentsData.shift(); // Remove the one we just added
+
+                    // Try to save only the most recent 20 moments
+                    if (momentsData.length > 20) {
+                        momentsData = momentsData.slice(0, 20);
+                        try {
+                            localStorage.setItem('mh_moments', JSON.stringify(momentsData));
+                            alert('Storage was full! Saved by keeping only your 20 most recent moments. \n\nConsider deleting some old moments.');
+                        } catch (e2) {
+                            alert('Storage is completely full! Please delete some moments first.');
+                            return;
+                        }
+                    } else {
+                        alert('Storage full! Try:\n1. Delete some old moments\n2. Use a smaller image\n3. Skip the image');
+                        return;
+                    }
+                } else {
+                    alert('Error saving moment. Please try again.');
+                    return;
+                }
+            }
+
+            // Reset form
+            input.value = '';
+            selectedImage = null;
+            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imageInput').value = '';
+
+            alert('📸 Moment Captured! 📸\n\nYour happiness is saved forever! ✨');
+            renderMoments();
+        }
+
+        function deleteMoment(index) {
+            if (confirm('Delete this happy moment?')) {
+                momentsData.splice(index, 1);
+                localStorage.setItem('mh_moments', JSON.stringify(momentsData));
+                renderMoments();
+            }
+        }
+
+        function renderMoments() {
+            const list = document.getElementById('momentsList');
+            document.getElementById('momentCount').textContent = momentsData.length;
+
+            if (momentsData.length === 0) {
+                list.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#999;">No moments yet. Start capturing your happy memories! 📸✨</p>';
+                return;
+            }
+
+            list.innerHTML = momentsData.map((moment, index) => `
+            <div class="moment-card">
+                <button class="delete-btn" onclick="deleteMoment(${index})" title="Delete moment">
+                    <i class="fas fa-times"></i>
+                </button>
+                ${moment.image ?
+                    `<img src="${moment.image}" class="moment-image" alt="Happy moment">` :
+                    `<div class="moment-image" style="display:flex; align-items:center; justify-content:center; font-size:4rem;">${moment.emoji}</div>`
+                }
+                <div class="moment-content">
+                    ${moment.image ? `<div class="moment-emoji">${moment.emoji}</div>` : ''}
+                    <div class="moment-text">${moment.text}</div>
+                    <div class="moment-date">${moment.date}</div>
+                </div>
+            </div>
+        `).join('');
+        }
+
+        document.getElementById('momentInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addMoment();
+            }
+        });
+
+        // Initialize on page load
+        loadData();
+        renderMoments();
+    </script>
+
+</body>
+
+</html>

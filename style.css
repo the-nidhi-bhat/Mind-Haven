@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    /* Default Theme (Pica Original) */
+    --bg-gradient: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text-color: #333;
+    --text-header: #fff;
+    --bot-msg-bg: rgba(255, 255, 255, 0.4);
+    --bot-msg-text: #fff;
+    --user-msg-bg: #ffffff;
+    --user-msg-text: #333;
+    --accent-color: #6c5ce7;
+    --popup-bg: rgba(255, 255, 255, 0.95);
+    --input-bg: rgba(255, 255, 255, 0.6);
+}
+
+/* THEME: Ocean Bliss */
+body.theme-ocean {
+    --bg-gradient: linear-gradient(-45deg, #006994, #0096c7, #48cae4, #90e0ef);
+    --accent-color: #0077b6;
+    --bot-msg-text: #fff;
+}
+
+/* THEME: Mystic Forest */
+body.theme-forest {
+    --bg-gradient: linear-gradient(-45deg, #2d6a4f, #40916c, #52b788, #74c69d);
+    --accent-color: #1b4332;
+}
+
+/* THEME: Sunset Glow */
+body.theme-sunset {
+    --bg-gradient: linear-gradient(-45deg, #ff512f, #dd2476, #ff9966, #ff5e62);
+    --accent-color: #c0392b;
+}
+
+/* THEME: Neon Midnight */
+body.theme-midnight {
+    --bg-gradient: linear-gradient(-45deg, #000000, #434343, #2c3e50, #000000);
+    --glass-bg: rgba(0, 0, 0, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-header: #00ffcc;
+    --bot-msg-bg: rgba(50, 50, 50, 0.8);
+    --bot-msg-text: #00ffcc;
+    --user-msg-bg: #222;
+    --user-msg-text: #fff;
+    --accent-color: #00ffcc;
+    --popup-bg: rgba(30, 30, 30, 0.95);
+    --text-color: #fff;
+    /* Popup text */
+    --input-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* THEME: Cotton Candy */
+body.theme-candy {
+    --bg-gradient: linear-gradient(-45deg, #ffc3a0, #ffafbd, #a18cd1, #fbc2eb);
+    --text-header: #5e548e;
+    --bot-msg-bg: rgba(255, 255, 255, 0.6);
+    --bot-msg-text: #5e548e;
+    --accent-color: #ff6b6b;
+}
+
+/* THEME: Royal Gold */
+body.theme-royal {
+    --bg-gradient: linear-gradient(-45deg, #141E30, #243B55, #ffd700, #141E30);
+    --text-header: #ffd700;
+    --bot-msg-text: #ffd700;
+    --accent-color: #ffd700;
+    --glass-bg: rgba(20, 30, 48, 0.7);
+    --bot-msg-bg: rgba(0, 0, 0, 0.5);
+}
+
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background 0.5s ease;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.app-container {
+    width: 95%;
+    max-width: 900px;
+    height: 90vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    animation: zoomIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+header {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--text-header);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth;
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
+
+.user-msg,
+.bot-msg {
+    padding: 14px 18px;
+    border-radius: 20px;
+    max-width: 80%;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    position: relative;
+    animation: slideUp 0.4s ease-out forwards;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-msg {
+    background: var(--user-msg-bg);
+    color: var(--user-msg-text);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-msg {
+    background: var(--bot-msg-bg);
+    color: var(--bot-msg-text);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--glass-border);
+}
+
+.bot-msg b {
+    color: var(--accent-color);
+    /* Updated for visibility */
+    filter: brightness(1.2);
+    /* Ensure visibility on dark */
+}
+
+.input-area {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+input {
+    flex: 1;
+    background: var(--input-bg);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    outline: none;
+    transition: all 0.3s;
+    font-family: inherit;
+    color: #333;
+    /* Input text usually needs to be dark unless input bg is dark */
+}
+
+/* Special case for midnight theme input text */
+body.theme-midnight input {
+    color: #fff;
+}
+
+input:focus {
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--glass-border);
+    color: #333;
+}
+
+.icon-btn {
+    background: var(--accent-color);
+    color: white;
+    /* Usually white icon on accent works */
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific fix for Candy theme which has light accent */
+body.theme-candy .icon-btn {
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* POPUP STYLES */
+.popup-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.popup-content {
+    background: var(--popup-bg);
+    width: 90%;
+    height: 85%;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--text-color);
+    /* Ensure popup text matches theme */
+}
+
+@keyframes popUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-header {
+    padding: 20px;
+    background: var(--accent-color);
+    color: #fff;
+    border-radius: 25px 25px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.popup-section {
+    margin-bottom: 25px;
+}
+
+.popup-section h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Ensure headings are visible in dark mode popups */
+body.theme-midnight .popup-section h3 {
+    color: #00ffcc;
+}
+
+.popup-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.popup-section li {
+    background: rgba(0, 0, 0, 0.05);
+    /* Neutral background for list items */
+    padding: 12px 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+/* Dark theme specific list item fix */
+body.theme-midnight .popup-section li {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.popup-section li:hover {
+    transform: translateX(5px);
+    border-color: var(--accent-color);
+}

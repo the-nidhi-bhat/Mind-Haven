@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+  </style>
+  <script src="auth.js?v=2"></script>
+  <script>
+    // Critical: Redirect to assessment if not completed
+    (function () {
+      try {
+        const raw = localStorage.getItem("mh_stress_assessment");
+        const currentUser = localStorage.getItem('mh_user') || sessionStorage.getItem('mh_user');
+
+        if (!raw) { throw "No data"; }
+
+        const data = JSON.parse(raw);
+
+        // STRICT CHECK: The data MUST have a userEmail and it MUST match the current user.
+        if (!data.userEmail || data.userEmail !== currentUser) {
+          throw "User mismatch";
+        }
+
+        if (typeof data.totalScore !== "number") {
+          throw "Invalid score";
+        }
+
+        // If we get here, data is valid. Show the UI ASAP.
+        window.addEventListener('DOMContentLoaded', () => {
+          document.body.style.visibility = 'visible';
+          document.body.style.opacity = '1';
+        });
+
+      } catch (e) {
+        console.warn("Redirecting because:", e);
+        // Clear the invalid data to keep things clean
+        localStorage.removeItem("mh_stress_assessment");
+        window.location.replace("assessment.html");
+      }
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <title>Healing Journey | Mindful Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="healing-journey.css">
+</head>
+
+<body>
+  <nav>
+    <a href="journey.html" class="logo" style="text-decoration:none; color:inherit;"><i class="fas fa-brain"></i>
+      Mindful Haven</a>
+    <ul class="nav-center">
+      <li><a href="journey.html">Dashboard</a></li>
+      <li><a href="healing-journey.html" class="active">Journey</a></li>
+      <li><a href="mood-tracker.html">Mood</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="crisis.html">Crisis</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-toggle" id="themeToggle" data-theme="light">
+        <i class="fas fa-sun"></i>
+        <span>Light</span>
+      </div>
+      <a href="counselors.html"><i class="fas fa-user-md"></i> Support</a>
+    </div>
+  </nav>
+
+  <!-- Rest of HTML remains exactly the same as previous version -->
+  <section class="hero">
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>✨ You're doing great! Every step forward counts. ✨</p>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="mood-checkin">
+          <div class="mood-checkin-title">How are you feeling right now?</div>
+          <div class="mood-emojis">
+            <button class="emoji-btn" data-mood="1" title="Very Low">😢</button>
+            <button class="emoji-btn" data-mood="2" title="Shaky">😕</button>
+            <button class="emoji-btn" data-mood="3" title="Okay">😐</button>
+            <button class="emoji-btn" data-mood="4" title="Calm">😌</button>
+            <button class="emoji-btn" data-mood="5" title="Good">😊</button>
+          </div>
+          <div class="mood-feedback" id="moodFeedback">Thanks for checking in.</div>
+        </div>
+
+        <div class="pill"><i class="fas fa-seedling"></i> The Healing Journey</div>
+        <h1>Your Personalized Path</h1>
+        <p id="heroSubtitle">Loading your data...</p>
+
+        <div class="badge-level" id="levelBadge">
+          <span class="badge-dot"></span>
+          <span></span>
+        </div>
+
+        <div class="progress-card">
+          <div class="progress-row">
+            <span>Today's activity completion</span>
+            <span id="journeyPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="journeyBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-right-title">
+          <i class="fas fa-target"></i> Today's focus
+        </div>
+        <div class="hero-right-sub" id="todayFocus">A short routine to match your current stress level.</div>
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px; opacity:0.8;">
+          <i class="fas fa-info-circle"></i> Small routines help your nervous system feel safer.
+        </div>
+
+        <div class="mini-progress">
+          <div class="mini-progress-label">
+            <span>Activities completed</span>
+            <span id="todayPercent">0%</span>
+          </div>
+          <div class="mini-progress-bar">
+            <div class="mini-progress-fill" id="todayBar"></div>
+          </div>
+        </div>
+
+        <div class="task-list" id="taskList"></div>
+
+        <div class="reflection-box">
+          <div class="reflection-prompt">What helped you feel even slightly better today?</div>
+          <textarea class="reflection-input" id="reflectionInput"
+            placeholder="A small win or a calm moment..."></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="main-inner">
+      <div>
+        <section class="section-card">
+          <div class="section-title"><i class="fas fa-compass"></i> Wellness Tools</div>
+          <div class="section-sub">Use these anytime — there’s no right order.</div>
+
+          <div class="quick-links">
+            <a href="mood-tracker.html" class="quick-link">
+              <div class="quick-link-icon"><i class="fas fa-heart"></i></div>
+              <div class="quick-link-text">
+                <div class="quick-link-title">Mood Tracking</div>
+                <div class="quick-link-desc">Monitor emotional patterns</div>
+              </div>
+            </a>
+
+            <a href="journal.html" class="quick-link">
+              <div class="quick-link-icon"><i class="fas fa-pen"></i></div>
+              <div class="quick-link-text">
+                <div class="quick-link-title">Reflective Journal</div>
+                <div class="quick-link-desc">Process your thoughts</div>
+              </div>
+            </a>
+
+            <a href="breathing.html" class="quick-link">
+              <div class="quick-link-icon"><i class="fas fa-wind"></i></div>
+              <div class="quick-link-text">
+                <div class="quick-link-title">Breathing Exercise</div>
+                <div class="quick-link-desc">Regulate nervous system</div>
+              </div>
+            </a>
+
+            <a href="crisis.html" class="quick-link">
+              <div class="quick-link-icon"><i class="fas fa-shield-heart"></i></div>
+              <div class="quick-link-text">
+                <div class="quick-link-title">Crisis Resources</div>
+                <div class="quick-link-desc">Safety support access</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-title collapsible-header" id="weekToggle">
+            <i class="fas fa-calendar-week"></i> Weekly Activity Plan
+            <i class="fas fa-chevron-down" style="margin-left:auto; font-size:0.9rem;"></i>
+          </div>
+          <div class="collapsible-content" id="weekContent">
+            <div class="section-sub" style="margin-top:10px;">Structured activities based on your assessment</div>
+            <div class="week-grid" id="weekPlan"></div>
+            <div
+              style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:var(--text-muted);">
+              <span id="weekStats">Weekly engagement: 0/7 days</span>
+              <a href="#" id="regenPlan" class="link-btn"><i class="fas fa-rotate"></i> Generate new plan</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="section-card">
+          <div class="section-title"><i class="fas fa-chart-line"></i> Progress Insights</div>
+          <div class="section-sub">Therapeutic activity tracking</div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-number">
+                <span id="totalTasks">0</span>
+              </div>
+              <div class="stat-label">Activities completed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">
+                <span id="moodCheckins">0</span>
+                <span id="moodTrend" class="stat-trend"></span>
+              </div>
+              <div class="stat-label">Mood check-ins</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">
+                <span id="journalEntries">0</span>
+              </div>
+              <div class="stat-label">Journal entries</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">
+                <span id="statsTrend" class="stat-trend stable">stable</span>
+              </div>
+              <div class="stat-label">Stress Trend</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card">
+          <div class="section-title"><i class="fas fa-user-circle"></i> Assessment Profile</div>
+          <div class="section-sub">Your personalization data</div>
+          <div class="pill-row" id="profilePills"></div>
+          <a href="assessment.html" class="link-btn"><i class="fas fa-pen"></i> Retake assessment</a>
+        </section>
+
+        <section class="section-card">
+          <div class="section-title"><i class="fas fa-shield-alt"></i> Safety Resources</div>
+          <div id="safetyBlock"></div>
+          <a href="crisis.html" class="link-btn"><i class="fas fa-phone-volume"></i> View crisis hotlines</a>
+          <a href="counselors.html" class="link-btn"><i class="fas fa-user-md"></i> Find professional support</a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <button class="sos-btn" onclick="window.location.href='crisis.html'" title="Emergency Support">SOS</button>
+
+  <script src="healing-journey.js?v=2"></script>
+</body>
+
+</html>

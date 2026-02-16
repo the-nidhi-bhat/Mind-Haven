@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zen Garden | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="zen-garden.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+        <div style="font-weight: 700; font-size: 1.1rem; color: #e8d5b7;">Zen Garden Designer</div>
+    </div>
+
+    <div class="game-container">
+        <div class="sidebar">
+            <div class="element-category">
+                <div class="category-title">Rocks</div>
+                <div class="element-grid">
+                    <div class="element-item" draggable="true" data-type="rock" data-emoji="🪨">🪨</div>
+                    <div class="element-item" draggable="true" data-type="rock" data-emoji="🗿">🗿</div>
+                    <div class="element-item" draggable="true" data-type="rock" data-emoji="⛰️">⛰️</div>
+                    <div class="element-item" draggable="true" data-type="rock" data-emoji="🏔️">🏔️</div>
+                </div>
+            </div>
+
+            <div class="element-category">
+                <div class="category-title">Plants</div>
+                <div class="element-grid">
+                    <div class="element-item" draggable="true" data-type="plant" data-emoji="🌿">🌿</div>
+                    <div class="element-item" draggable="true" data-type="plant" data-emoji="🎋">🎋</div>
+                    <div class="element-item" draggable="true" data-type="plant" data-emoji="🌸">🌸</div>
+                    <div class="element-item" draggable="true" data-type="plant" data-emoji="🍃">🍃</div>
+                </div>
+            </div>
+
+            <div class="element-category">
+                <div class="category-title">Decor</div>
+                <div class="element-grid">
+                    <div class="element-item" draggable="true" data-type="decor" data-emoji="🏮">🏮</div>
+                    <div class="element-item" draggable="true" data-type="decor" data-emoji="⛩️">⛩️</div>
+                    <div class="element-item" draggable="true" data-type="decor" data-emoji="🕯️">🕯️</div>
+                    <div class="element-item" draggable="true" data-type="decor" data-emoji="🪷">🪷</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="garden-wrapper" id="gardenWrapper">
+            <canvas id="canvas" width="900" height="650"></canvas>
+
+            <div class="tools">
+                <button class="tool-btn active" onclick="setTool('rake')" id="btn-rake" title="Rake">
+                    <i class="fas fa-grip-lines"></i>
+                </button>
+                <button class="tool-btn" onclick="setTool('circles')" id="btn-circles" title="Circles">
+                    ⭕
+                </button>
+                <button class="tool-btn" onclick="setTool('erase')" id="btn-erase" title="Erase">
+                    <i class="fas fa-eraser"></i>
+                </button>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn" onclick="clearGarden()">
+                    <i class="fas fa-broom"></i> Clear
+                </button>
+                <button class="control-btn" onclick="saveGarden()">
+                    <i class="fas fa-download"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="zen-garden.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+
+</html>

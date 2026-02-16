@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Breathing Exercise | Mindful Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="breathing.css">
+</head>
+
+<body>
+  <nav>
+    <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+    <ul class="nav-center">
+      <li><a href="healing-journey.html">Journey</a></li>
+      <li><a href="mood-tracker.html">Mood</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="crisis.html">Crisis</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="counselors.html"><i class="fas fa-user-md"></i> Support</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="breathing-container">
+      <h1 class="breathing-title">Box Breathing Exercise</h1>
+      <p class="breathing-sub">Calm your nervous system with a simple 4-4-4-4 pattern</p>
+
+      <div class="breathing-circle" id="breathingCircle">
+        <div class="breathing-text" id="breathingText">4</div>
+      </div>
+
+      <div class="breathing-instruction" id="instruction">Click "Start" to begin</div>
+
+      <div>
+        <button class="btn-control" id="startBtn">Start Exercise</button>
+        <button class="btn-control btn-secondary" id="stopBtn" style="display:none;">Stop</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="breathing.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,214 @@
+:root {
+    /* Light Mode */
+    --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+    --sage-dark: #5a6b56;
+    --sage-light: #e8f3e5;
+    --lavender: #d4c5e8;
+    --bg-primary: #f9fafb;
+    --bg-secondary: #ffffff;
+    --text-dark: #111827;
+    --text-muted: #6b7280;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --border-light: #e5e7eb;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode */
+    --sage-gradient: linear-gradient(135deg, #1a1d2e 0%, #1f2937 100%);
+    --sage-dark: #94a3b8;
+    --sage-light: #1e293b;
+    --lavender: #6366f1;
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a1d2e;
+    --text-dark: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent: #8b5cf6;
+    --accent-soft: #312e81;
+    --border-light: #2d3748;
+    --glass-bg: rgba(26, 29, 46, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s;
+}
+
+.header-bar {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 100;
+}
+
+.back-link {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.canvas-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border: 2px solid var(--border-light);
+}
+
+#waveCanvas {
+    display: block;
+    cursor: crosshair;
+    background: var(--bg-secondary);
+    transition: background 0.3s;
+}
+
+.controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    padding: 12px 20px;
+    border-radius: 60px;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 90%;
+}
+
+.control-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dark);
+    padding: 10px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+.color-picker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.color-picker:hover {
+    transform: scale(1.1);
+}
+
+.color-picker.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.divider {
+    width: 1px;
+    height: 30px;
+    background: var(--border-light);
+    margin: 0 8px;
+}
+
+.info-panel {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    padding: 16px 32px;
+    border-radius: 50px;
+    border: 1px solid var(--border-light);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.info-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .controls {
+        padding: 10px 16px;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+
+    .color-picker {
+        width: 35px;
+        height: 35px;
+    }
+}

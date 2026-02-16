@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Unwind | Mindful Haven</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="word-unwind.css">
+</head>
+
+<body>
+    <nav>
+        <a href="journey.html" class="logo">
+            <i class="fas fa-brain"></i> Mindful Haven
+        </a>
+        <div class="nav-right">
+            <a href="games.html" class="btn-back">Back to Games</a>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="header-section">
+            <h1>Word Unwind</h1>
+            <p>Relax your mind by unscrambling positive words.</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <span class="label">Score</span>
+                <span class="value" id="score">0</span>
+            </div>
+            <div class="score-item">
+                <button class="hint-btn" onclick="showHint()">
+                    <i class="fas fa-lightbulb"></i> Hint
+                </button>
+            </div>
+        </div>
+
+        <div class="word-card">
+            <div class="scrambled-text" id="scrambleWord">LOADING</div>
+            <p class="hint-text" id="hintText"></p>
+
+            <div class="input-area">
+                <input type="text" id="userGuess" placeholder="Type answer here..." autocomplete="off">
+                <button class="check-btn" onclick="checkWord()">Check</button>
+            </div>
+            <div class="message" id="message"></div>
+        </div>
+
+        <button class="skip-btn" onclick="nextWord()">Skip Word <i class="fas fa-forward"></i></button>
+
+    </div>
+
+    <script src="word-unwind.js"></script>
+</body>
+
+</html>

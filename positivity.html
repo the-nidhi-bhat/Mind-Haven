@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positivity Hub | Mindful Haven</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="positivity.css">
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+    <ul class="nav-links">
+      <li><a href="journey.html">Home</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="meditation.html">Meditate</a></li>
+      <li><a href="counselors.html" class="support-pill">Support</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-sun"></i><span>Light</span></button>
+  </nav>
+
+  <div class="hero-container">
+    <div class="leaf-left-hero"></div>
+    <div class="leaf-right-hero"></div>
+    <div class="mindful-buddies"></div>
+    <div class="hero-card">
+      <span class="hero-badge">✨ Daily Inspiration ✨</span>
+      <h1>Your Dose of Positivity</h1>
+      <p>Celebrate the good, embrace gratitude, and shine brighter every day</p>
+      <div class="quote-box">
+        <div class="quote-text" id="dailyQuote">"Believe you can and you're halfway there."</div>
+        <div class="quote-author" id="quoteAuthor">— Theodore Roosevelt</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+    <div class="leaf-left-section"></div>
+    <div class="leaf-right-section"></div>
+    <div class="leaf-left-bottom"></div>
+    <div class="leaf-right-bottom"></div>
+
+    <!-- Daily Affirmations -->
+    <div class="sec-title"><i class="fas fa-sparkles"></i> Daily Affirmations</div>
+    <div class="positivity-grid">
+      <div class="positivity-item" onclick="speakAffirmation('I am capable of achieving my goals')">
+        <div class="icon-box"><i class="fas fa-star"></i></div>
+        <div class="txt">
+          <h4>I Am Capable</h4>
+          <p>You have the strength to achieve anything</p>
+          <span class="tag" style="background:var(--aff-1); color:var(--aff-1-txt);">Empowerment</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="speakAffirmation('I am worthy of love and respect')">
+        <div class="icon-box"><i class="fas fa-heart"></i></div>
+        <div class="txt">
+          <h4>I Am Worthy</h4>
+          <p>You deserve all the love in the world</p>
+          <span class="tag" style="background:var(--aff-2); color:var(--aff-2-txt);">Self-Love</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="speakAffirmation('I choose happiness and peace today')">
+        <div class="icon-box"><i class="fas fa-smile-beam"></i></div>
+        <div class="txt">
+          <h4>I Choose Joy</h4>
+          <p>Happiness is a choice you make today</p>
+          <span class="tag" style="background:var(--aff-3); color:var(--aff-3-txt);">Happiness</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="speakAffirmation('I am grateful for this beautiful day')">
+        <div class="icon-box"><i class="fas fa-sun"></i></div>
+        <div class="txt">
+          <h4>I Am Grateful</h4>
+          <p>Every day brings opportunities to be thankful</p>
+          <span class="tag" style="background:var(--aff-4); color:var(--aff-4-txt);">Gratitude</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="speakAffirmation('I am strong and resilient')">
+        <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+        <div class="txt">
+          <h4>I Am Strong</h4>
+          <p>You can overcome any challenge</p>
+          <span class="tag" style="background:var(--aff-1); color:var(--aff-1-txt);">Strength</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="speakAffirmation('I trust the journey of my life')">
+        <div class="icon-box"><i class="fas fa-compass"></i></div>
+        <div class="txt">
+          <h4>I Trust the Journey</h4>
+          <p>Everything happens for a reason</p>
+          <span class="tag" style="background:var(--aff-4); color:var(--aff-4-txt);">Faith</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Positivity Boosters -->
+    <div class="sec-title"><i class="fas fa-rocket"></i> Positivity Boosters</div>
+    <div class="positivity-grid">
+      <div class="positivity-item" onclick="location.href='kindness.html'">
+        <div class="icon-box"><i class="fas fa-hands-helping"></i></div>
+        <div class="txt">
+          <h4>Kindness Challenge</h4>
+          <p>Do one small act of kindness today</p>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="location.href='wins.html'">
+        <div class="icon-box"><i class="fas fa-trophy"></i></div>
+        <div class="txt">
+          <h4>Celebrate Wins</h4>
+          <p>Big or small, every achievement counts</p>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="location.href='moments.html'">
+        <div class="icon-box"><i class="fas fa-camera"></i></div>
+        <div class="txt">
+          <h4>Happy Moments</h4>
+          <p>Capture moments that make you smile</p>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="location.href='music.html'">
+        <div class="icon-box"><i class="fas fa-music"></i></div>
+        <div class="txt">
+          <h4>Uplifting Playlist</h4>
+          <p>Music that lifts your spirit</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Inspiration -->
+    <div class="sec-title"><i class="fas fa-quote-left"></i> More Inspiration</div>
+    <div class="positivity-grid">
+      <div class="positivity-item" onclick="showQuote(0)">
+        <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+        <div class="txt">
+          <h4>Success Mindset</h4>
+          <p>Quotes about achieving goals</p>
+          <span class="tag" style="background:var(--aff-1); color:var(--aff-1-txt);">Motivation</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="showQuote(1)">
+        <div class="icon-box"><i class="fas fa-fire"></i></div>
+        <div class="txt">
+          <h4>Inner Strength</h4>
+          <p>Quotes about resilience</p>
+          <span class="tag" style="background:var(--aff-2); color:var(--aff-2-txt);">Courage</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="showQuote(2)">
+        <div class="icon-box"><i class="fas fa-rainbow"></i></div>
+        <div class="txt">
+          <h4>Joy & Happiness</h4>
+          <p>Quotes about living fully</p>
+          <span class="tag" style="background:var(--aff-3); color:var(--aff-3-txt);">Joy</span>
+        </div>
+      </div>
+      <div class="positivity-item" onclick="showQuote(3)">
+        <div class="icon-box"><i class="fas fa-leaf"></i></div>
+        <div class="txt">
+          <h4>Peace & Calm</h4>
+          <p>Quotes about inner peace</p>
+          <span class="tag" style="background:var(--aff-4); color:var(--aff-4-txt);">Serenity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="bottom-nav">
+    <a href="journey.html"><i class="fas fa-home"></i>Home</a>
+    <a href="crisis.html" class="sos-circle">SOS</a>
+    <a href="games.html"><i class="fas fa-gamepad"></i>Games</a>
+  </div>
+
+  <script src="positivity.js"></script>
+</body>
+
+</html>

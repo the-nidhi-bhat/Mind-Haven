@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mindful Haven | Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="journey.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-brain"></i> Mindful Haven
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="meditation.html">Meditate</a></li>
+      <li><a href="counselors.html">Connect</a></li>
+
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle night mode">
+        <i class="fas fa-moon"></i>
+        <span id="themeLabel">Dark</span>
+      </button>
+      <a href="settings.html" class="theme-toggle" aria-label="Settings"
+        style="margin-left:8px;text-decoration:none;color:inherit;">
+        <i class="fas fa-cog"></i>
+      </a>
+      <button class="theme-toggle" onclick="signOut()" aria-label="Sign Out" style="margin-left:8px;">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO WITH LEAVES -->
+  <section class="hero">
+    <div class="leaf-left-hero"></div>
+    <div class="leaf-right-hero"></div>
+    <div class="mindful-buddies"></div>
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">Welcome to your calm dashboard</h1>
+        <p class="hero-sub">
+          Hop between music, games, journaling, and support — all in one soft, leafy space that matches your landing
+          page.
+        </p>
+        <div class="hero-pill-row">
+          <div class="hero-pill"><i class="fas fa-face-smile"></i> Mood‑based tools</div>
+          <div class="hero-pill"><i class="fas fa-music"></i> Focus & sleep</div>
+          <div class="hero-pill"><i class="fas fa-gamepad"></i> Light games</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-right-header">
+          <span>Monthly view</span>
+          <span id="miniMonthLabel" style="font-weight:600;"></span>
+        </div>
+        <div class="mini-cal-grid" id="miniCalendar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN FEATURES -->
+  <section class="features-grid">
+    <div class="leaf-left-section"></div>
+    <div class="leaf-right-section"></div>
+    <div class="leaf-left-bottom"></div>
+    <div class="leaf-right-bottom"></div>
+    <div class="feature-card">
+      <i class="fas fa-headphones"></i>
+      <h3>Soothing Sounds</h3>
+      <p>Curated ambience and playlists that match your current mood and help you breathe easier.</p>
+      <a href="music.html" class="blue-btn">
+        Explore Now <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-gamepad"></i>
+      <h3>Mind Games</h3>
+      <p>Short, low‑pressure games that gently distract, ground, and train your attention.</p>
+      <a href="games.html" class="blue-btn">
+        Explore Now <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-hiking"></i>
+      <h3>Healing Journey</h3>
+      <p>Guided paths through emotions, recovery steps, and progress tracking for your personal growth.</p>
+      <a href="#" onclick="checkHealingAccess(event)" class="blue-btn">
+        Explore Now <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- EXPLORE STRIP -->
+  <section class="explore-more">
+    <h2>Explore more</h2>
+    <div class="icon-strip">
+      <a href="meditation.html" class="square-item bg-meditation">
+        <i class="fas fa-spa"></i> Meditation
+      </a>
+      <a href="pomodoro.html" class="square-item bg-pomodoro">
+        <i class="fas fa-clock"></i> Pomodoro
+      </a>
+      <a href="yoga.html" class="square-item bg-yoga">
+        <i class="fas fa-spa"></i> Yoga
+      </a>
+      <a href="counselors.html" class="square-item bg-counselors">
+        <i class="fas fa-user-md"></i> Counselors
+      </a>
+      <a href="chatbot2.html" class="square-item bg-chatbot">
+        <i class="fas fa-robot"></i> AI Chatbot
+      </a>
+      <a href="positivity.html" class="square-item bg-positivity">
+        <i class="fas fa-smile"></i> Positivity
+      </a>
+    </div>
+  </section>
+
+  <!-- FLOATING ACTIONS -->
+  <a href="crisis.html" class="sos-floating">SOS</a>
+  <div class="ai-fab" onclick="window.location.href='chatbot2.html'">
+    <i class="fas fa-robot" style="font-size:1.2rem;"></i>
+  </div>
+
+  <!-- MOBILE BAR -->
+  <div class="mobile-bar">
+    <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+    <a href="journal.html" class="nav-item"><i class="fas fa-book"></i>Journal</a>
+    <a href="counselors.html" class="nav-item"><i class="fas fa-user-circle"></i>Therapy</a>
+    <a href="games.html" class="nav-item"><i class="fas fa-gamepad"></i>Games</a>
+  </div>
+
+  <script src="journey.js"></script>
+</body>
+
+</html>

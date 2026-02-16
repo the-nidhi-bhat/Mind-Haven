@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Maze Runner | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="maze-runner.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+        <div style="font-weight: 700; font-size: 1.1rem;">Maze Runner</div>
+    </div>
+
+    <div class="game-container">
+        <div class="game-info">
+            <div class="info-item">
+                <i class="fas fa-layer-group"></i>
+                <span>Level: <span id="levelNum">1</span>/10</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span>Time: <span id="timer">0:00</span></span>
+            </div>
+        </div>
+
+        <canvas id="canvas" width="600" height="600" tabindex="0"></canvas>
+
+        <div class="mobile-controls">
+            <button class="d-pad-btn" id="btnUp"><i class="fas fa-chevron-up"></i></button>
+            <button class="d-pad-btn" id="btnLeft"><i class="fas fa-chevron-left"></i></button>
+            <button class="d-pad-btn" id="btnDown"><i class="fas fa-chevron-down"></i></button>
+            <button class="d-pad-btn" id="btnRight"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="controls-hint">
+            Use Arrow Keys to move • Reach the green goal to win!
+        </div>
+
+        <div class="level-complete" id="levelComplete">
+            <h2>🎉 Level Complete!</h2>
+            <p>Great job! Ready for the next challenge?</p>
+            <button class="next-btn" onclick="nextLevel()">Next Level</button>
+        </div>
+
+        <div class="game-over" id="gameOver">
+            <h2>🏆 Congratulations!</h2>
+            <p>You completed all 10 levels!</p>
+            <p>Total Time: <span id="finalTime"></span></p>
+            <button class="next-btn" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
+
+    <script src="maze-runner.js"></script>
+</body>
+
+</html>

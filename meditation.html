@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8" />
+  <title>Meditation & Mindfulness | Mindful Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="meditation.css">
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <i class="fas fa-brain"></i> <span>Mindful Haven</span>
+    </a>
+    <div class="nav-right">
+      <div class="music-toggle" id="musicToggle" title="Toggle Background Music">
+        <i class="fas fa-music"></i>
+        <span>Calm Music</span>
+      </div>
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <span>Light</span>
+      </div>
+      <a href="journey.html" class="control-btn" style="text-decoration: none; padding: 10px 24px;">Dashboard</a>
+    </div>
+  </nav>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"
+      type="audio/mpeg">
+  </audio>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="leaf-left-hero"></div>
+    <div class="leaf-right-hero"></div>
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>✨ Take a deep breath... ✨</p>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">Meditation & Mindfulness</h1>
+      <p class="hero-subtitle">
+        Find your inner peace with meditative techniques, habit tracking, and calming visuals.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="leaf-left-section"></div>
+    <div class="leaf-right-section"></div>
+    <div class="leaf-left-bottom"></div>
+    <div class="leaf-right-bottom"></div>
+    <!-- Meditation Journey Tracker -->
+    <section class="feature-section">
+      <div class="glass-container">
+        <h2 class="section-title">Your Meditation Journey</h2>
+        <p class="section-subtitle">Track your progress and stay consistent with your mindfulness practice.</p>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-value" id="statMins">0</span>
+            <span class="stat-label">Total Minutes</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statSessions">0</span>
+            <span class="stat-label">Sessions</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value" id="statStreak">0</span>
+            <span class="stat-label">Day Streak</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meditation Techniques Guide -->
+    <section class="feature-section">
+      <h2 class="section-title">Meditation Techniques</h2>
+      <p class="section-subtitle">Explore different ways to practice mindfulness and find what works for you.</p>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-icon"><i class="fas fa-brain"></i></div>
+          <h3 class="guide-title">Mindfulness (Vipassana)</h3>
+          <p class="guide-content">
+            The practice of non-judgmental awareness. Observe your thoughts and sensations as they arise and pass away,
+            returning gently to your breath each time your mind wanders.
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-icon"><i class="fas fa-heart"></i></div>
+          <h3 class="guide-title">Loving-Kindness (Metta)</h3>
+          <p class="guide-content">
+            Focus on developing feelings of goodwill, kindness, and warmth towards yourself and others by silently
+            repeating phrases like "May I be happy, may I be well."
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-icon"><i class="fas fa-spa"></i></div>
+          <h3 class="guide-title">Body Scan</h3>
+          <p class="guide-content">
+            Mentally scan your body from head to toe, noticing any areas of tension or sensation. This practice builds
+            deep somatic awareness and promotes physical relaxation.
+          </p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-icon"><i class="fas fa-eye"></i></div>
+          <h3 class="guide-title">Zen (Zazen)</h3>
+          <p class="guide-content">
+            Simple seated meditation focused on posture and breath. It emphasizes "just sitting" (shikantaza) without
+            seeking any specific state of mind.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breathing Exercise -->
+    <section class="breathing-container">
+      <h2 class="section-title">Box Breathing Exercise</h2>
+      <p class="section-subtitle">Follow the circle: Inhale for 4 counts, hold for 4, exhale for 4, hold for 4.</p>
+
+      <div class="breathing-circle" id="breathingCircle">
+        <div class="visualizer-orb"></div>
+        <span>Inhale</span>
+      </div>
+
+      <div class="breathing-controls">
+        <button class="btn-breathing" id="startBreathing" onclick="startBreathing()">
+          <i class="fas fa-play"></i> Start
+        </button>
+        <button class="btn-breathing secondary" id="stopBreathing" onclick="stopBreathing()" style="display:none;">
+          <i class="fas fa-stop"></i> Stop
+        </button>
+      </div>
+    </section>
+
+    <!-- Meditation Timer -->
+    <section class="timer-container">
+      <h2 class="section-title">Meditation Timer</h2>
+      <p class="section-subtitle">Set a timer for silent meditation or use with ambient sounds below.</p>
+
+      <div class="timer-presets">
+        <button class="preset-btn" onclick="setTimer(5, event)">5 min</button>
+        <button class="preset-btn active" onclick="setTimer(10, event)">10 min</button>
+        <button class="preset-btn" onclick="setTimer(15, event)">15 min</button>
+        <button class="preset-btn" onclick="setTimer(20, event)">20 min</button>
+        <button class="preset-btn" onclick="setTimer(30, event)">30 min</button>
+      </div>
+
+      <div class="timer-display" id="timerDisplay">10:00</div>
+
+      <div class="breathing-controls">
+        <button class="btn-breathing" id="startTimer" onclick="startTimer()">
+          <i class="fas fa-play"></i> Start Timer
+        </button>
+        <button class="btn-breathing secondary" id="pauseTimer" onclick="pauseTimer()" style="display:none;">
+          <i class="fas fa-pause"></i> Pause
+        </button>
+        <button class="btn-breathing secondary" onclick="resetTimer()">
+          <i class="fas fa-rotate-right"></i> Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- Daily Zen Wisdom -->
+    <section class="feature-section">
+      <div class="wisdom-card">
+        <div class="quote-text" id="quoteDisplay">
+          "The mind is like water. When it's turbulent, it's difficult to see. When it's calm, everything becomes
+          clear."
+        </div>
+        <div class="quote-author" id="quoteAuthor">— Prasad Madura</div>
+        <button class="new-quote-btn" onclick="generateQuote()"><i class="fas fa-sync-alt"></i> New Wisdom</button>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <span class="footer-logo"><i class="fas fa-brain"></i> Mindful Haven</span>
+      <p>© 2025 Mindful Haven · Your Digital Sanctuary for Mental Wellness</p>
+      <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">Crafting moments of peace in a busy world.</p>
+    </div>
+  </footer>
+
+  <!-- MOBILE BAR -->
+  <div class="mobile-bar">
+    <a href="journey.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+    <a href="meditation.html" class="nav-item active"><i class="fas fa-spa"></i>Meditate</a>
+    <a href="games.html" class="nav-item"><i class="fas fa-gamepad"></i>Games</a>
+    <a href="journal.html" class="nav-item"><i class="fas fa-pen"></i>Journal</a>
+  </div>
+
+  <script src="meditation.js"></script>
+</body>
+
+</html>

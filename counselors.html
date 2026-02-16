@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counselors & Support | Mindful Haven</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="counselors.css">
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo"><i class="fas fa-brain"></i> Mindful Haven</div>
+    <ul class="nav-links">
+      <li><a href="journey.html">Home</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="meditation.html">Meditate</a></li>
+      <li><a href="counselors.html" class="support-pill">Support</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle"><i class="fas fa-sun"></i><span>Light</span></button>
+  </nav>
+
+  <div class="hero-container">
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>💜 You're taking a brave step by seeking support. We're here for you!</p>
+    </div>
+    <div class="hero-illustration">
+      <svg class="heart-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#c9dcc4;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#d4c5e8;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M50,85 C50,85 20,65 20,45 C20,30 30,25 40,30 C45,32 50,40 50,40 C50,40 55,32 60,30 C70,25 80,30 80,45 C80,65 50,85 50,85 Z"
+          fill="url(#heartGrad)" stroke="#5a6b56" stroke-width="2" />
+        <circle cx="35" cy="42" r="3" fill="#fff" opacity="0.6" />
+        <circle cx="65" cy="42" r="3" fill="#fff" opacity="0.6" />
+      </svg>
+    </div>
+    <div class="hero-text">
+      <h1>Professional Support When You Need It</h1>
+      <p>Connect with licensed therapists and counselors who care about your mental well-being.</p>
+      <p>Safe, confidential, and compassionate support available 24/7.</p>
+    </div>
+  </div>
+
+  <div class="explore-section">
+    <h2 class="section-title">Support Resources</h2>
+    <div class="explore-grid">
+      <div class="explore-card">
+        <div class="card-icon">📞</div>
+        <h3 class="card-title">Crisis Helpline</h3>
+        <p class="card-desc">24/7 emergency support for immediate assistance</p>
+        <a href="crisis.html" class="card-btn">Get Help Now</a>
+      </div>
+      <div class="explore-card">
+        <div class="card-icon">💬</div>
+        <h3 class="card-title">Chat Support</h3>
+        <p class="card-desc">Anonymous text-based counseling sessions</p>
+        <a href="chatbot2.html" class="card-btn">Start Chat</a>
+      </div>
+      <div class="explore-card">
+        <div class="card-icon">📚</div>
+        <h3 class="card-title">Resources</h3>
+        <p class="card-desc">Self-help guides and mental health information</p>
+        <a href="journey.html" class="card-btn">Explore</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="counselors-section">
+    <h2 class="section-title">Available Counselors</h2>
+
+    <div class="counselors-list">
+
+      <!-- Counselor 1 -->
+      <div class="counselor-card">
+        <div class="counselor-header">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&h=200&fit=crop"
+            alt="Dr. Priya Sharma" class="counselor-avatar avatar-purple">
+          <div class="counselor-basic">
+            <h3 class="counselor-name">Dr. Priya Sharma</h3>
+            <p class="counselor-title">Clinical Psychologist</p>
+            <div class="rating">
+              <i class="fas fa-star star"></i>
+              <span class="review-count">(234 reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-badges">
+          <div class="info-badge badge-blue">
+            <i class="fas fa-graduation-cap"></i>
+            <span>10+ years</span>
+          </div>
+          <div class="info-badge badge-green">
+            <i class="fas fa-calendar-check"></i>
+            <span>Available Today</span>
+          </div>
+        </div>
+
+        <p class="counselor-desc">
+          Specializes in stress management, anxiety, and cognitive behavioral therapy. Expert in helping individuals
+          cope with daily challenges.
+        </p>
+
+        <div class="languages">
+          <i class="fas fa-globe lang-icon"></i>
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">Hindi</span>
+          <span class="lang-tag">Marathi</span>
+        </div>
+
+        <div class="counselor-footer">
+          <div class="session-fee">
+            <span class="fee-label">Session Fee</span>
+            <div>
+              <span class="fee-amount">₹200</span>
+              <span class="fee-per">/session</span>
+            </div>
+          </div>
+          <button class="book-btn" onclick="bookSession('Dr. Priya Sharma')">
+            <i class="fas fa-calendar"></i>
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Counselor 2 -->
+      <div class="counselor-card">
+        <div class="counselor-header">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop"
+            alt="Dr. Rajesh Kumar" class="counselor-avatar avatar-blue">
+          <div class="counselor-basic">
+            <h3 class="counselor-name">Dr. Rajesh Kumar</h3>
+            <p class="counselor-title">Mental Health Counselor</p>
+            <div class="rating">
+              <i class="fas fa-star star"></i>
+              <span class="review-count">(312 reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-badges">
+          <div class="info-badge badge-blue">
+            <i class="fas fa-graduation-cap"></i>
+            <span>15+ years</span>
+          </div>
+          <div class="info-badge badge-yellow">
+            <i class="fas fa-calendar-check"></i>
+            <span>Available Tomorrow</span>
+          </div>
+        </div>
+
+        <p class="counselor-desc">
+          Expert in depression, work-related stress, and relationship counseling. Provides compassionate and
+          evidence-based support.
+        </p>
+
+        <div class="languages">
+          <i class="fas fa-globe lang-icon"></i>
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">Hindi</span>
+          <span class="lang-tag">Tamil</span>
+        </div>
+
+        <div class="counselor-footer">
+          <div class="session-fee">
+            <span class="fee-label">Session Fee</span>
+            <div>
+              <span class="fee-amount">₹250</span>
+              <span class="fee-per">/session</span>
+            </div>
+          </div>
+          <button class="book-btn" onclick="bookSession('Dr. Rajesh Kumar')">
+            <i class="fas fa-calendar"></i>
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Counselor 3 -->
+      <div class="counselor-card">
+        <div class="counselor-header">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop"
+            alt="Dr. Ananya Patel" class="counselor-avatar avatar-green">
+          <div class="counselor-basic">
+            <h3 class="counselor-name">Dr. Ananya Patel</h3>
+            <p class="counselor-title">Family Therapist</p>
+            <div class="rating">
+              <i class="fas fa-star star"></i>
+              <span class="review-count">(189 reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-badges">
+          <div class="info-badge badge-blue">
+            <i class="fas fa-graduation-cap"></i>
+            <span>8+ years</span>
+          </div>
+          <div class="info-badge badge-green">
+            <i class="fas fa-calendar-check"></i>
+            <span>Available Today</span>
+          </div>
+        </div>
+
+        <p class="counselor-desc">
+          Specializes in family dynamics, parenting support, and adolescent mental health. Creates a safe space for
+          healing and growth.
+        </p>
+
+        <div class="languages">
+          <i class="fas fa-globe lang-icon"></i>
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">Gujarati</span>
+          <span class="lang-tag">Hindi</span>
+        </div>
+
+        <div class="counselor-footer">
+          <div class="session-fee">
+            <span class="fee-label">Session Fee</span>
+            <div>
+              <span class="fee-amount">₹220</span>
+              <span class="fee-per">/session</span>
+            </div>
+          </div>
+          <button class="book-btn" onclick="bookSession('Dr. Ananya Patel')">
+            <i class="fas fa-calendar"></i>
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Counselor 4 -->
+      <div class="counselor-card">
+        <div class="counselor-header">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&h=200&fit=crop"
+            alt="Dr. Arjun Mehta" class="counselor-avatar avatar-purple">
+          <div class="counselor-basic">
+            <h3 class="counselor-name">Dr. Arjun Mehta</h3>
+            <p class="counselor-title">Trauma Specialist</p>
+            <div class="rating">
+              <i class="fas fa-star star"></i>
+              <span class="review-count">(276 reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-badges">
+          <div class="info-badge badge-blue">
+            <i class="fas fa-graduation-cap"></i>
+            <span>12+ years</span>
+          </div>
+          <div class="info-badge badge-green">
+            <i class="fas fa-calendar-check"></i>
+            <span>Available Today</span>
+          </div>
+        </div>
+
+        <p class="counselor-desc">
+          Expert in PTSD, trauma recovery, and EMDR therapy. Helps individuals process difficult experiences and build
+          resilience.
+        </p>
+
+        <div class="languages">
+          <i class="fas fa-globe lang-icon"></i>
+          <span class="lang-tag">English</span>
+          <span class="lang-tag">Hindi</span>
+          <span class="lang-tag">Punjabi</span>
+        </div>
+
+        <div class="counselor-footer">
+          <div class="session-fee">
+            <span class="fee-label">Session Fee</span>
+            <div>
+              <span class="fee-amount">₹300</span>
+              <span class="fee-per">/session</span>
+            </div>
+          </div>
+          <button class="book-btn" onclick="bookSession('Dr. Arjun Mehta')">
+            <i class="fas fa-calendar"></i>
+            Book Now
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="journey.html"><i class="fas fa-home"></i>Home</a>
+    <a href="crisis.html" class="sos-circle">SOS</a>
+    <a href="games.html"><i class="fas fa-gamepad"></i>Games</a>
+  </div>
+
+  <script src="counselors.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Mindful Haven | Your Digital Sanctuary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <i class="fas fa-brain"></i> Mindful Haven
+    </div>
+    <div class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-center">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#support">Support</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <span>Light</span>
+      </div>
+      <a href="sign-in.html" class="btn-learn" id="navSignInBtn">Sign In</a>
+    </div>
+  </nav>
+
+  <!-- HERO / OVERVIEW -->
+  <section id="overview" class="hero">
+    <div class="botanical-left"></div>
+    <div class="botanical-right"></div>
+
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">Mental Health Matters</h1>
+        <p class="hero-subtitle">
+          This is your Mindful Haven welcome screen. It simply shows what you get—mood tracking, journaling, yoga, and
+          crisis tools. Click "Learn More" to open your full dashboard.
+        </p>
+        <a href="journey.html" class="hero-cta">
+          Learn More <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="hero-illustration">
+        <div class="illustration-container">
+          <div class="float-element" style="top:20%;left:10%;"></div>
+          <div class="float-element" style="bottom:30%;right:15%;"></div>
+          <svg class="illustration-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(80, 120)">
+              <ellipse cx="0" cy="0" rx="50" ry="60" fill="#ffc9b5" />
+              <circle cx="0" cy="-30" r="35" fill="#ffc9b5" />
+              <path d="M-35,-30 Q-40,-50 -30,-60 Q-20,-65 -10,-60 Q0,-65 10,-60 Q20,-65 30,-60 Q40,-50 35,-30"
+                fill="#5a6b56" />
+              <ellipse cx="-25" cy="-50" rx="15" ry="8" fill="#87a383" transform="rotate(-30 -25 -50)" />
+              <ellipse cx="25" cy="-50" rx="15" ry="8" fill="#87a383" transform="rotate(30 25 -50)" />
+              <circle cx="15" cy="-55" r="5" fill="#d4c5e8" />
+              <circle cx="-15" cy="-55" r="5" fill="#d4c5e8" />
+              <path d="M-12,-25 Q-8,-27 -4,-25" stroke="#5a6b56" stroke-width="2" fill="none" stroke-linecap="round" />
+              <path d="M4,-25 Q8,-27 12,-25" stroke="#5a6b56" stroke-width="2" fill="none" stroke-linecap="round" />
+            </g>
+            <g transform="translate(280, 130)">
+              <ellipse cx="0" cy="0" rx="50" ry="60" fill="#ffc9b5" />
+              <circle cx="0" cy="-30" r="35" fill="#ffc9b5" />
+              <path d="M-35,-30 Q-40,-50 -30,-60 Q-20,-70 0,-65 Q20,-70 30,-60 Q40,-50 35,-30" fill="#5a6b56" />
+              <ellipse cx="-28" cy="-48" rx="18" ry="10" fill="#87a383" transform="rotate(-25 -28 -48)" />
+              <ellipse cx="28" cy="-48" rx="18" ry="10" fill="#87a383" transform="rotate(25 28 -48)" />
+              <circle cx="0" cy="-65" r="6" fill="#d4c5e8" />
+              <circle cx="-20" cy="-60" r="4" fill="#d4c5e8" />
+              <path d="M-12,-25 Q-8,-28 -4,-25" stroke="#5a6b56" stroke-width="2" fill="none" stroke-linecap="round" />
+              <path d="M4,-25 Q8,-28 12,-25" stroke="#5a6b56" stroke-width="2" fill="none" stroke-linecap="round" />
+              <path d="M-8,-15 Q0,-12 8,-15" stroke="#5a6b56" stroke-width="2" fill="none" stroke-linecap="round" />
+            </g>
+            <ellipse cx="50" cy="80" rx="25" ry="12" fill="#87a383" opacity="0.6" transform="rotate(-40 50 80)" />
+            <ellipse cx="350" cy="100" rx="28" ry="14" fill="#87a383" opacity="0.6" transform="rotate(35 350 100)" />
+            <ellipse cx="180" cy="50" rx="20" ry="10" fill="#d4c5e8" opacity="0.5" transform="rotate(-15 180 50)" />
+            <ellipse cx="220" cy="260" rx="22" ry="11" fill="#d4c5e8" opacity="0.5" transform="rotate(20 220 260)" />
+            <circle cx="120" cy="70" r="4" fill="#d4c5e8" opacity="0.7" />
+            <circle cx="310" cy="85" r="3" fill="#87a383" opacity="0.7" />
+            <circle cx="200" cy="220" r="3" fill="#d4c5e8" opacity="0.7" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / TOOLS -->
+  <section id="tools" class="features">
+    <h2 class="section-title">What You'll Find Inside</h2>
+    <p class="section-subtitle">These tools become interactive on your Journey dashboard.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#f0f9ff;color:#0284c7;">
+          <i class="fas fa-face-smile"></i>
+        </div>
+        <h3 class="feature-title">Mood Tracker</h3>
+        <p class="feature-desc">Emoji check-ins, notes, and weekly patterns to understand how your days really feel.</p>
+        <span class="feature-tag">Preview • Works inside dashboard</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fef3c7;color:#d97706;">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3 class="feature-title">Private Journal</h3>
+        <p class="feature-desc">Stress-aware prompts, mood tags, and word count to build a steady reflection habit.</p>
+        <span class="feature-tag">Preview only</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#ddd6fe;color:#7c3aed;">
+          <i class="fas fa-spa"></i>
+        </div>
+        <h3 class="feature-title">Yoga & Breathing</h3>
+        <p class="feature-desc">Micro-practices for anxiety, grounding, and sleep that blend into your routine.</p>
+        <span class="feature-tag">Unlock via dashboard</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#d1fae5;color:#059669;">
+          <i class="fas fa-route"></i>
+        </div>
+        <h3 class="feature-title">Journey Dashboard</h3>
+        <p class="feature-desc">One central place where all tools connect into a clear, personalized plan.</p>
+        <span class="feature-tag">Destination: journey.html</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#fee2e2;color:#dc2626;">
+          <i class="fas fa-triangle-exclamation"></i>
+        </div>
+        <h3 class="feature-title">Crisis & SOS</h3>
+        <p class="feature-desc">Helplines, safety plan, and location-aware SOS SMS for moments of intense distress.</p>
+        <span class="feature-tag">Accessible from dashboard</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:#e0e7ff;color:#4f46e5;">
+          <i class="fas fa-user-doctor"></i>
+        </div>
+        <h3 class="feature-title">Counselor Support</h3>
+        <p class="feature-desc">Information and guidance to reach professional help when you are ready.</p>
+        <span class="feature-tag">Preview • Full details inside</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / SUPPORT -->
+  <section id="support" class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">Click Once. Your Dashboard Awaits.</h2>
+      <p class="cta-text">
+        This page is just the cover. The real experience is your Journey dashboard where everything becomes interactive
+        and tailored to you.
+      </p>
+      <a href="journey.html" class="hero-cta">
+        Learn More <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Mindful Haven · Landing screen only. All features live in your Journey dashboard.
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+
+</html>

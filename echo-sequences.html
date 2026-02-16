@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Echo Sequences | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+            --sage-dark: #5a6b56;
+            --bg-secondary: #ffffff;
+            --text-dark: #111827;
+            --accent: #6366f1;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --bowl-gradient: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.1));
+        }
+
+        [data-theme="dark"] {
+            --sage-gradient: linear-gradient(135deg, #1a1d2e 0%, #1f2937 100%);
+            --sage-dark: #94a3b8;
+            --bg-secondary: #0f172a;
+            --text-dark: #f1f5f9;
+            --accent: #8b5cf6;
+            --glass-bg: rgba(26, 29, 46, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--sage-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-exit {
+            padding: 10px 24px;
+            background: var(--text-dark);
+            color: var(--bg-secondary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-exit:hover {
+            transform: scale(1.05);
+        }
+
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Ambient Background Ripple */
+        .ripple-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        .hud {
+            position: absolute;
+            top: 30px;
+            background: var(--glass-bg);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .hud-val {
+            font-size: 1.8rem;
+            font-family: 'Playfair Display';
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .hud-lbl {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .tones-circle {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            /* border: 1px solid var(--glass-border); */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Singing Bowls */
+        .bowl {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .bowl::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--bowl-gradient);
+            opacity: 0.3;
+        }
+
+        .bowl::after {
+            /* Ring resonance visual */
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--color);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: 0.3s;
+        }
+
+        .bowl:active,
+        .bowl.active {
+            transform: scale(1.1);
+            background: var(--color);
+            /* Solid color or brighter */
+            box-shadow: 0 0 40px var(--color-glow);
+        }
+
+        .bowl.active::after {
+            animation: ring 1s ease-out;
+        }
+
+        @keyframes ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Positioning 5 buttons in a circle */
+        .t1 {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            --color: #f472b6;
+            --color-glow: rgba(244, 114, 182, 0.6);
+        }
+
+        .t2 {
+            top: 30%;
+            right: -20px;
+            --color: #a78bfa;
+            --color-glow: rgba(167, 139, 250, 0.6);
+        }
+
+        .t3 {
+            bottom: -10px;
+            right: 20%;
+            --color: #60a5fa;
+            --color-glow: rgba(96, 165, 250, 0.6);
+        }
+
+        .t4 {
+            bottom: -10px;
+            left: 20%;
+            --color: #34d399;
+            --color-glow: rgba(52, 211, 153, 0.6);
+        }
+
+        .t5 {
+            top: 30%;
+            left: -20px;
+            --color: #fbbf24;
+            --color-glow: rgba(251, 191, 36, 0.6);
+        }
+
+        .center-status {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            border: 4px solid var(--glass-border);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-start {
+            margin-top: 60px;
+            background: var(--text-dark);
+            color: var(--bg-secondary);
+            border: none;
+            padding: 20px 60px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .tones-circle {
+                width: 260px;
+                height: 260px;
+                margin-top: 40px;
+            }
+
+            .bowl {
+                width: 70px;
+                height: 70px;
+            }
+
+            .center-status {
+                width: 90px;
+                height: 90px;
+                font-size: 0.8rem;
+            }
+
+            .hud {
+                top: 70px;
+                padding: 10px 25px;
+            }
+
+            .btn-start {
+                padding: 15px 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-brain"></i> Mindful Haven</a>
+        <a href="games.html" class="btn-exit">Back</a>
+    </nav>
+
+    <div class="game-container">
+        <div class="ripple-bg" id="bgRipple"></div>
+
+        <div class="hud">
+            <div class="hud-val" id="level">1</div>
+            <div class="hud-lbl">Resonance</div>
+        </div>
+
+        <div class="tones-circle">
+            <div class="bowl t1" id="btn-0"></div>
+            <div class="bowl t2" id="btn-1"></div>
+            <div class="bowl t3" id="btn-2"></div>
+            <div class="bowl t4" id="btn-3"></div>
+            <div class="bowl t5" id="btn-4"></div>
+
+            <div class="center-status" id="status">Listen</div>
+        </div>
+
+        <button class="btn-start" id="startBtn" onclick="startGame()">Begin Echo</button>
+    </div>
+
+    <script>
+        // --- AUDIO ENGINE V3 (Crystalline) ---
+        class AudioEngine {
+            constructor() {
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                this.master = this.ctx.createGain();
+                this.master.gain.value = 0.3;
+                this.master.connect(this.ctx.destination);
+
+                // Reverb
+                this.convolver = this.ctx.createConvolver();
+                this.buildImpulse();
+                this.reverbGain = this.ctx.createGain();
+                this.reverbGain.gain.value = 0.6;
+                this.convolver.connect(this.reverbGain);
+                this.reverbGain.connect(this.master);
+            }
+
+            buildImpulse() {
+                const rate = this.ctx.sampleRate;
+                const length = rate * 2.5; // 2.5s tail
+                const buffer = this.ctx.createBuffer(2, length, rate);
+                for (let i = 0; i < length; i++) {
+                    const decay = Math.pow(1 - i / length, 3);
+                    buffer.getChannelData(0)[i] = (Math.random() * 2 - 1) * decay;
+                    buffer.getChannelData(1)[i] = (Math.random() * 2 - 1) * decay;
+                }
+                this.convolver.buffer = buffer;
+            }
+
+            playBowl(freq) {
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+                const t = this.ctx.currentTime;
+
+                // Fundamental
+                const osc = this.ctx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, t);
+
+                // Overtone
+                const osc2 = this.ctx.createOscillator();
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(freq * 2.02, t); // Slightly detuned harmonic
+
+                const gain = this.ctx.createGain();
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.4, t + 0.1); // Attack
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 2.5); // Long release
+
+                const gain2 = this.ctx.createGain();
+                gain2.gain.setValueAtTime(0, t);
+                gain2.gain.linearRampToValueAtTime(0.05, t + 0.1);
+                gain2.gain.exponentialRampToValueAtTime(0.001, t + 2.0);
+
+                osc.connect(gain);
+                osc2.connect(gain2);
+
+                gain.connect(this.master);
+                gain.connect(this.convolver);
+                gain2.connect(this.master);
+                gain2.connect(this.convolver);
+
+                osc.start(t); osc.stop(t + 3);
+                osc2.start(t); osc2.stop(t + 3);
+            }
+
+            playFail() {
+                // Dissonant sound
+                this.playBowl(100);
+                setTimeout(() => this.playBowl(104), 50);
+            }
+        }
+
+        const audio = new AudioEngine();
+
+        // --- GAME LOGIC ---
+        let sequence = [];
+        let inputIndex = 0;
+        let isPlaying = false;
+        let isListening = false;
+
+        // Pentatonic Scale
+        const freqs = [261.63, 293.66, 329.63, 392.00, 440.00];
+
+        const statusEl = document.getElementById('status');
+        const startBtn = document.getElementById('startBtn');
+        const levelEl = document.getElementById('level');
+        const bgRipple = document.getElementById('bgRipple');
+
+        function visualPulse(idx) {
+            const btn = document.getElementById(`btn-${idx}`);
+            btn.classList.add('active');
+            setTimeout(() => btn.classList.remove('active'), 400);
+
+            // Bg ripple color match
+            const color = getComputedStyle(btn).getPropertyValue('--color').trim();
+
+            // Confetti Burst
+            const rect = btn.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth;
+            const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+            confetti({
+                particleCount: 12,
+                spread: 30,
+                origin: { x: x, y: y },
+                colors: [color],
+                disableForReducedMotion: true,
+                scalar: 0.8,
+                ticks: 60
+            });
+
+            gsap.fromTo(bgRipple,
+                { opacity: 0.4, scale: 0, background: `radial-gradient(circle, ${color} 0%, transparent 70%)` },
+                { opacity: 0, scale: 2, duration: 1.5, ease: "power2.out" }
+            );
+        }
+
+        async function playSequence() {
+            isPlaying = true;
+            isListening = false;
+            statusEl.textContent = "Listen";
+            statusEl.style.borderColor = "var(--glass-border)";
+
+            await new Promise(r => setTimeout(r, 1000));
+
+            for (let i = 0; i < sequence.length; i++) {
+                const idx = sequence[i];
+                audio.playBowl(freqs[idx]);
+                visualPulse(idx);
+                await new Promise(r => setTimeout(r, 800)); // Slower pace for zen feel
+            }
+
+            isPlaying = false;
+            isListening = true;
+            statusEl.textContent = "Echo";
+            statusEl.style.borderColor = "var(--accent)";
+        }
+
+        function startGame() {
+            sequence = [];
+            startBtn.style.display = 'none';
+            addToSequence();
+        }
+
+        function addToSequence() {
+            inputIndex = 0;
+            sequence.push(Math.floor(Math.random() * 5));
+            levelEl.textContent = sequence.length;
+            playSequence();
+        }
+
+        // Attach listeners
+        for (let i = 0; i < 5; i++) {
+            const btn = document.getElementById(`btn-${i}`);
+            btn.addEventListener('mousedown', () => handleInput(i));
+            btn.addEventListener('touchstart', (e) => { e.preventDefault(); handleInput(i); });
+        }
+
+        function handleInput(idx) {
+            if (!isListening || isPlaying) return;
+
+            // Interaction visual
+            visualPulse(idx);
+            audio.playBowl(freqs[idx]);
+
+            if (sequence[inputIndex] === idx) {
+                inputIndex++;
+                if (inputIndex >= sequence.length) {
+                    // Success for this round
+                    isListening = false;
+                    statusEl.textContent = "Harmonize";
+                    setTimeout(addToSequence, 1200);
+                }
+            } else {
+                // Fail
+                isListening = false;
+                audio.playFail();
+                statusEl.textContent = "Dissonance";
+                startBtn.style.display = 'block';
+                startBtn.textContent = 'Retry Echo';
+            }
+        }
+    </script>
+</body>
+
+</html>

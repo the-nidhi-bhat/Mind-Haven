@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soothing Sounds | Mindful Haven</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="music.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo"><i class="fas fa-spa"></i> Mindful Haven</div>
+        <ul class="nav-links">
+            <li><a href="journey.html">Home</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="meditation.html">Meditation</a></li>
+            <li><a href="counselors.html" class="support-pill">Support</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+                <span id="themeLabel">Dark</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="leaf-left-hero"></div>
+        <div class="leaf-right-hero"></div>
+        <div class="mindful-buddies"></div>
+        <div class="affirmation-bubble">
+            <p>✨ Let the melody heal you 🎵 ✨</p>
+        </div>
+
+        <div class="player-card">
+            <div class="video-wrapper">
+                <iframe id="main-player" width="100%" height="100%" src="https://www.youtube.com/embed/ggfebQ-5-UE"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+            <div class="player-info">
+                <p
+                    style="text-transform:uppercase; font-weight:800; font-size:0.8rem; letter-spacing:2px; color:var(--text-dark); opacity:0.8;">
+                    Now Healing</p>
+                <h1 id="track-title">Yaman Drut</h1>
+                <p id="track-artist">Purbayan Chatterjee & Rakesh Chaurasia</p>
+                <button class="action-btn" onclick="addToPlaylist()"><i class="fas fa-plus"></i> Add to
+                    Playlist</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playlist Section -->
+    <div class="content-area" id="playlist-container" style="display:none; margin-bottom:40px;">
+        <div class="sec-title"><i class="fas fa-list-ul"></i> Your Playlist</div>
+        <div class="music-grid" id="playlist-grid">
+            <!-- Playlist items will appear here -->
+        </div>
+    </div>
+
+    <div class="content-area">
+        <div class="leaf-left-section"></div>
+        <div class="leaf-right-section"></div>
+        <div class="leaf-left-bottom"></div>
+        <div class="leaf-right-bottom"></div>
+        <!-- Meditation -->
+        <div class="sec-title"><i class="fas fa-om"></i> Deep Meditation</div>
+        <div class="music-grid">
+            <div class="music-item" onclick="play('jqnAaUOFOyE', 'Insomnia Relief', 'The Singing Violin')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Insomnia Relief</h4>
+                    <p>Violin Meditation</p>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('pFenlzgBEns', 'Monsoon Malhar', 'Sitar Classical')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Monsoon Malhar</h4>
+                    <p>Nature Fusion</p>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('6o5npd-KS5s', 'Sitar for Health', 'Rishab Sharma')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Sitar Wellness</h4>
+                    <p>Mental Health Mix</p>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('jMcMLAyddzU', 'Morning Raga', 'Bhairavi')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Morning Raga</h4>
+                    <p>Positive Energy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stress Levels -->
+        <div class="sec-title"><i class="fas fa-leaf"></i> Stress Relief Journey</div>
+        <div class="music-grid">
+            <!-- Level 1 -->
+            <div class="music-item" onclick="play('1loVfme-8hc', 'Evening Melody', 'Subrahmanya Hegde')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Evening Melody</h4>
+                    <p>Raag Durga</p><span class="tag" style="background:var(--lvl-1); color:var(--lvl-1-txt)">Level
+                        1</span>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('IaWMS9vmWRM', 'Stress Reduction', 'Mindful Sounds')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Stress Reduction</h4>
+                    <p>Zen Audio</p><span class="tag" style="background:var(--lvl-1); color:var(--lvl-1-txt)">Level
+                        1</span>
+                </div>
+            </div>
+
+
+            <div class="music-item" onclick="play('z0Jpoyv-T7E', 'Peaceful Guitar', 'Acoustic')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Peaceful Guitar</h4>
+                    <p>Soft Strings</p><span class="tag" style="background:var(--lvl-1); color:var(--lvl-1-txt)">Level
+                        1</span>
+                </div>
+            </div>
+            <!-- Level 2 -->
+            <div class="music-item" onclick="play('1ZYbU82GVz4', 'Deep Calm', 'Manish Vyas')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Deep Calm</h4>
+                    <p>Raga Darbari</p><span class="tag" style="background:var(--lvl-2); color:var(--lvl-2-txt)">Level
+                        2</span>
+                </div>
+            </div>
+
+            <div class="music-item" onclick="play('4XluDP8Ob54', 'Anxiety Relief', 'Healing Frequencies')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Anxiety Relief</h4>
+                    <p>Frequency Healing</p><span class="tag"
+                        style="background:var(--lvl-2); color:var(--lvl-2-txt)">Level 2</span>
+                </div>
+            </div>
+            <!-- Level 3 -->
+            <div class="music-item" onclick="play('nl_7H8UYGDk', 'Intense Peace', 'Purbayan Chatterjee')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Intense Peace</h4>
+                    <p>Raga Jaunpuri</p><span class="tag" style="background:var(--lvl-3); color:var(--lvl-3-txt)">Level
+                        3</span>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('hNn2tBohjxE', 'Om Chanting', 'Spiritual')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Om Chanting</h4>
+                    <p>Divine Connection</p><span class="tag"
+                        style="background:var(--lvl-3); color:var(--lvl-3-txt)">Level 3</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleep -->
+        <div class="sec-title"><i class="fas fa-moon"></i> Sleep & Nature</div>
+        <div class="music-grid">
+            <div class="music-item" onclick="play('yqeirBfn2j4', 'De-stress & Relax', 'Flute & Santoor')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>De-stress & Relax</h4>
+                    <p>Flute & Santoor</p>
+                </div>
+            </div>
+
+            <div class="music-item" onclick="play('IvjMgVS6kng', 'Relaxing River', 'Nature')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Relaxing River</h4>
+                    <p>Water Sounds</p>
+                </div>
+            </div>
+
+            <div class="music-item" onclick="play('ujyu7tkyxtw', 'Tibetan Bowls', 'Rain')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Rain & Bowls</h4>
+                    <p>10 Hour Sleep</p>
+                </div>
+            </div>
+            <div class="music-item" onclick="play('91AcVUR0O8I', 'Forest Birds', 'Morning Ambience')">
+                <div class="icon-box"><i class="fas fa-play"></i></div>
+                <div class="txt">
+                    <h4>Forest Birds</h4>
+                    <p>Morning Ambience</p>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- Floating SOS -->
+    <a href="crisis.html" class="sos-floating">SOS</a>
+
+    <div class="mobile-bar">
+        <a href="journey.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+        <a href="games.html" class="nav-item"><i class="fas fa-gamepad"></i>Games</a>
+        <a href="journal.html" class="nav-item"><i class="fas fa-book"></i>Journal</a>
+        <a href="counselors.html" class="nav-item"><i class="fas fa-user-circle"></i>Therapy</a>
+    </div>
+
+    <script src="music.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8" />
+  <title>Assessment | Mindful Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+      --sage-dark: #5a6b56;
+      --white: #ffffff;
+      --border-light: #e5e7eb;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+      --accent: #6366f1;
+      --accent-soft: #eef2ff;
+      --danger: #dc2626;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: var(--text-dark);
+      padding-bottom: 60px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 8%;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--sage-dark);
+    }
+
+    .logo i {
+      color: var(--sage-dark);
+      font-size: 1.3rem;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-center a {
+      text-decoration: none;
+      color: #4b5563;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: #4b5563;
+      font-size: 0.9rem;
+    }
+
+    .hero-strip {
+      padding: 40px 8% 30px;
+      background: var(--sage-gradient);
+      transition: background 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .botanical-left,
+    .botanical-right {
+      position: absolute;
+      opacity: 0.4;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 0;
+    }
+
+    .botanical-left {
+      left: -50px;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M50,50 Q80,100 50,150 T50,250 T50,350" stroke="%235a6b56" stroke-width="3" fill="none" opacity="0.3"/><ellipse cx="70" cy="80" rx="30" ry="15" fill="%2387a383" opacity="0.4" transform="rotate(-20 70 80)"/><ellipse cx="30" cy="130" rx="35" ry="18" fill="%2387a383" opacity="0.4" transform="rotate(15 30 130)"/><ellipse cx="65" cy="200" rx="28" ry="14" fill="%2387a383" opacity="0.4" transform="rotate(-25 65 200)"/></svg>') no-repeat;
+      background-size: contain;
+    }
+
+    .botanical-right {
+      right: -50px;
+      top: 0;
+      width: 300px;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 400"><path d="M150,50 Q120,100 150,150 T150,250 T150,350" stroke="%235a6b56" stroke-width="3" fill="none" opacity="0.3"/><ellipse cx="130" cy="80" rx="30" ry="15" fill="%2387a383" opacity="0.4" transform="rotate(20 130 80)"/><ellipse cx="170" cy="130" rx="35" ry="18" fill="%2387a383" opacity="0.4" transform="rotate(-15 170 130)"/><ellipse cx="135" cy="200" rx="28" ry="14" fill="%2387a383" opacity="0.4" transform="rotate(25 135 200)"/></svg>') no-repeat;
+      background-size: contain;
+    }
+
+    [data-theme="dark"] .botanical-left,
+    [data-theme="dark"] .botanical-right {
+      opacity: 0.15;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.1rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: #374151;
+      max-width: 520px;
+    }
+
+    .main {
+      padding: 20px 8%;
+    }
+
+    .main-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 22px 20px 20px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .step-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .card .sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .field-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .field {
+      flex: 1;
+      min-width: 170px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    .question {
+      padding: 10px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .question:last-of-type {
+      border-bottom: none;
+    }
+
+    .q-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .scale-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .scale-option {
+      flex: 1;
+      min-width: 90px;
+    }
+
+    .scale-option input {
+      display: none;
+    }
+
+    .scale-option label {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1.5px solid #e5e7eb;
+      font-size: 0.78rem;
+      text-align: center;
+      cursor: pointer;
+      background: #f9fafb;
+      color: #4b5563;
+      display: block;
+    }
+
+    .scale-option input:checked+label {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: #3730a3;
+      font-weight: 600;
+    }
+
+    .error {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--danger);
+      display: none;
+    }
+
+    .footer-actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: #fff;
+      border-color: #111827;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: #4b5563;
+      border-color: #d1d5db;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: 20px;
+    }
+
+    .progress-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 6px;
+    }
+
+    /* Emergency modal styles */
+    .emergency-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .emergency-modal.active {
+      display: flex;
+    }
+
+    .emergency-content {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      border: 4px solid #dc2626;
+      margin: auto;
+    }
+
+    .emergency-icon {
+      font-size: 80px;
+      margin-bottom: 24px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+    }
+
+    .emergency-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #dc2626;
+      margin-bottom: 16px;
+    }
+
+    .emergency-text {
+      color: #475569;
+      margin-bottom: 32px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .helpline-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .helpline-card {
+      background: #fef2f2;
+      border: 2px solid #fca5a5;
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .helpline-card:hover {
+      border-color: #dc2626;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+    }
+
+    .helpline-name {
+      font-weight: 700;
+      color: #dc2626;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .helpline-number {
+      font-size: 32px;
+      font-weight: 700;
+      color: #991b1b;
+      margin-bottom: 8px;
+    }
+
+    .helpline-number a {
+      color: #991b1b;
+      text-decoration: none;
+    }
+
+    .helpline-details {
+      font-size: 13px;
+      color: #7f1d1d;
+    }
+
+    .emergency-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-emergency {
+      padding: 18px 32px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 17px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .btn-crisis {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-counselor {
+      background: #7c3aed;
+      color: white;
+    }
+
+    .btn-continue-assessment {
+      background: white;
+      color: #475569;
+      border: 2px solid #cbd5e0;
+    }
+
+    @media(max-width:900px) {
+      .nav-center {
+        display: none;
+      }
+    }
+
+    .mindful-buddies {
+      position: absolute;
+      bottom: 20px;
+      right: 5%;
+      width: 150px;
+      height: 110px;
+      z-index: 2;
+      opacity: 0.9;
+      pointer-events: none;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><g transform="translate(80, 100)"><ellipse cx="0" cy="0" rx="35" ry="45" fill="%23ffc9b5" /><path d="M-35,-15 Q0,-45 35,-15" fill="%235a6b56" /><ellipse cx="-20" cy="-25" rx="12" ry="8" fill="%2387a383" transform="rotate(-20)" /><ellipse cx="20" cy="-25" rx="12" ry="8" fill="%2387a383" transform="rotate(20)" /><path d="M-10,5 Q-5,8 0,5 M10,5 Q15,8 20,5" stroke="%23374151" stroke-width="2" fill="none" opacity="0.6"/><path d="M-5,20 Q5,28 15,20" stroke="%23374151" stroke-width="2" fill="none" /></g><g transform="translate(200, 110)"><ellipse cx="0" cy="0" rx="38" ry="48" fill="%23ffc9b5" /><path d="M-38,-15 Q0,-48 38,-15" fill="%235a6b56" /><ellipse cx="-22" cy="-28" rx="14" ry="9" fill="%2387a383" transform="rotate(-15)" /><ellipse cx="22" cy="-28" rx="14" ry="9" fill="%2387a383" transform="rotate(15)" /><path d="M-12,5 Q-6,8 0,5 M12,5 Q18,8 24,5" stroke="%23374151" stroke-width="2" fill="none" opacity="0.6"/><path d="M-6,22 Q6,30 18,22" stroke="%23374151" stroke-width="2" fill="none" /></g><circle cx="40" cy="40" r="10" fill="%23d4c5e8" opacity="0.5" /><circle cx="260" cy="160" r="8" fill="%23d4c5e8" opacity="0.5" /></svg>') no-repeat center/contain;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes fadeInBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.05);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .affirmation-bubble {
+      position: absolute;
+      bottom: 110px;
+      right: 5%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+      backdrop-filter: blur(16px);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 24px;
+      padding: 16px 22px;
+      max-width: 260px;
+      z-index: 3;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: fadeInBounce 1.2s ease-out 0.8s both;
+    }
+
+    [data-theme="dark"] .affirmation-bubble {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .affirmation-bubble p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      font-weight: 600;
+      line-height: 1.5;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <i class="fas fa-brain"></i> Mindful Haven
+    </div>
+    <ul class="nav-center">
+      <li><a href="journey.html">Journey</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="positivity.html">Positivity</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="counselors.html"><i class="fas fa-user-md"></i> Support</a>
+    </div>
+  </nav>
+
+  <section class="hero-strip">
+    <div class="botanical-left"></div>
+    <div class="botanical-right"></div>
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>✨ Be honest with yourself ✨</p>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><i class="fas fa-flask"></i> Clinical assessment</div>
+      <h1 class="hero-title">Your Healing Assessment</h1>
+      <p class="hero-sub">Evidence-based screening using validated PHQ-9 and GAD-7 tools to build your personalized
+        healing plan.</p>
+    </div>
+  </section>
+
+  <!-- EMERGENCY CRISIS MODAL -->
+  <div class="emergency-modal" id="emergencyModal">
+    <div class="emergency-content">
+      <div class="emergency-icon">🆘</div>
+      <div class="emergency-title">You Are Not Alone</div>
+      <div class="emergency-text">
+        <strong>Your safety matters.</strong> Your responses indicate you may be experiencing difficult thoughts.
+        <br><br>
+        We want to make sure you have access to immediate support if you need it:
+      </div>
+
+      <div class="helpline-grid">
+        <div class="helpline-card">
+          <div class="helpline-name">🚨 National Emergency Services</div>
+          <div class="helpline-number"><a href="tel:112">112</a></div>
+          <div class="helpline-details">24/7 • All India • Immediate Response</div>
+        </div>
+
+        <div class="helpline-card">
+          <div class="helpline-name">💚 KIRAN Mental Health Helpline</div>
+          <div class="helpline-number"><a href="tel:18005990019">1800-599-0019</a></div>
+          <div class="helpline-details">24/7 • Government of India • Free • 13 Languages</div>
+        </div>
+
+        <div class="helpline-card">
+          <div class="helpline-name">🤝 Vandrevala Foundation</div>
+          <div class="helpline-number"><a href="tel:9999666555">9999-666-555</a></div>
+          <div class="helpline-details">24/7 • Call/SMS/WhatsApp • Hindi, English, Gujarati</div>
+        </div>
+      </div>
+
+      <div class="emergency-text" style="font-size: 15px; margin-bottom: 24px;">
+        <strong>Choose what feels right for you:</strong>
+      </div>
+
+      <div class="emergency-buttons">
+        <a href="sos.html" class="btn-emergency btn-crisis">🆘 I Need Emergency Help (SOS Page)</a>
+        <a href="Counselor.html" class="btn-emergency btn-counselor">💬 Find a Professional Counselor</a>
+        <button class="btn-emergency btn-continue-assessment" onclick="closeEmergencyModal()">Continue to My
+          Assessment</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <div class="main-inner">
+      <!-- Progress bar -->
+      <div class="progress-wrapper">
+        <span id="progressLabel">Welcome · 0%</span>
+        <span id="questionCounter"></span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <!-- STEP 1: Profile -->
+      <section class="card" id="profileSection">
+        <div class="step-label">Personalization</div>
+        <h2>Tell us about yourself</h2>
+        <p class="sub">Age band + profession help us design realistic routines.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="ageBand">Age band</label>
+            <select id="ageBand">
+              <option value="">Select age band</option>
+              <option value="13-17">13–17</option>
+              <option value="18-24">18–24</option>
+              <option value="25-34">25–34</option>
+              <option value="35-49">35–49</option>
+              <option value="50+">50+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="age">Age (optional)</label>
+            <input id="age" type="number" min="13" max="100" placeholder="18" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="profession">Profession</label>
+            <select id="profession">
+              <option value="">Select your role</option>
+              <option value="student">Student</option>
+              <option value="working_professional">Working professional</option>
+              <option value="homemaker">Homemaker</option>
+              <option value="entrepreneur">Entrepreneur</option>
+              <option value="healthcare">Healthcare worker</option>
+              <option value="teacher">Teacher</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="profileError" class="error">Please choose an age band and profession to continue.</div>
+
+        <div class="footer-actions">
+          <button class="btn-secondary" onclick="window.location.href='journey.html'">← Cancel</button>
+          <button class="btn-primary" id="profileNext">Begin Assessment <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </section>
+
+      <!-- Clinical questions container -->
+      <section class="card" id="questionContainer" style="display:none;">
+        <!-- Questions will be dynamically inserted here -->
+      </section>
+
+      <!-- Results section -->
+      <section class="card" id="resultsSection" style="display:none;">
+        <!-- Results will be displayed here -->
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // === CLINICAL QUESTIONS (PHQ-9 + GAD-7 + extras) ===
+    const clinicalQuestions = [
+      // PHQ-9 Depression (Questions 1-9)
+      { id: 1, text: "Little interest or pleasure in doing things", category: "depression", critical: false },
+      { id: 2, text: "Feeling down, depressed, or hopeless", category: "depression", critical: false },
+      { id: 3, text: "Trouble falling or staying asleep, or sleeping too much", category: "depression", critical: false },
+      { id: 4, text: "Feeling tired or having little energy", category: "depression", critical: false },
+      { id: 5, text: "Poor appetite or overeating", category: "depression", critical: false },
+      { id: 6, text: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down", category: "self_worth", critical: false },
+      { id: 7, text: "Trouble concentrating on things, such as reading the newspaper or watching television", category: "depression", critical: false },
+      { id: 8, text: "Moving or speaking so slowly that other people could have noticed. Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual", category: "depression", critical: false },
+      { id: 9, text: "⚠️ Thoughts that you would be better off dead, or of hurting yourself in some way", category: "suicide_risk", critical: true },
+
+      // GAD-7 Anxiety (Questions 10-16)
+      { id: 10, text: "Feeling nervous, anxious, or on edge", category: "anxiety", critical: false },
+      { id: 11, text: "Not being able to stop or control worrying", category: "anxiety", critical: false },
+      { id: 12, text: "Worrying too much about different things", category: "anxiety", critical: false },
+      { id: 13, text: "Trouble relaxing", category: "anxiety", critical: false },
+      { id: 14, text: "Being so restless that it is hard to sit still", category: "anxiety", critical: false },
+      { id: 15, text: "Becoming easily annoyed or irritable", category: "anxiety", critical: false },
+      { id: 16, text: "Feeling afraid, as if something awful might happen", category: "anxiety", critical: false },
+
+      // Additional screening questions
+      { id: 17, text: "How difficult have these problems made it for you to do your work, take care of things at home, or get along with other people?", category: "functional_impairment", critical: false },
+      { id: 18, text: "Experiencing unwanted memories, nightmares, or flashbacks of a traumatic or very stressful experience", category: "trauma", critical: false },
+      { id: 19, text: "Have you experienced the death of someone close to you or a major relationship breakup in the past year?", category: "grief_loss", critical: false },
+      { id: 20, text: "Feeling lonely or socially isolated from others", category: "loneliness", critical: false }
+    ];
+
+    const optionsPHQ = [
+      { v: "0", t: "Not at all" },
+      { v: "1", t: "Several days" },
+      { v: "2", t: "More than half the days" },
+      { v: "3", t: "Nearly every day" }
+    ];
+
+    let currentQuestion = 0;
+    let answers = {};
+    let profession = '';
+    let ageBand = '';
+    let age = null;
+    let categoryScores = {
+      depression: 0,
+      anxiety: 0,
+      suicide_risk: 0,
+      self_worth: 0,
+      functional_impairment: 0,
+      trauma: 0,
+      grief_loss: 0,
+      loneliness: 0
+    };
+
+    const SAVE_KEY = "mh_assessment_state";
+
+    function saveState() {
+      const state = { currentQuestion, answers, profession, ageBand, age };
+      localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(SAVE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function clearState() {
+      localStorage.removeItem(SAVE_KEY);
+    }
+
+    // Profile section
+    document.getElementById('profileNext').addEventListener('click', () => {
+      ageBand = document.getElementById('ageBand').value;
+      const ageVal = document.getElementById('age').value.trim();
+      profession = document.getElementById('profession').value;
+      const err = document.getElementById('profileError');
+
+      if (!ageBand || !profession) {
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+
+      age = ageVal ? Number(ageVal) : null;
+
+      const profile = { ageBand, age, profession };
+      localStorage.setItem("mh_user_profile", JSON.stringify(profile));
+
+      document.getElementById('profileSection').style.display = 'none';
+      showQuestion(0);
+    });
+
+    function updateProgressUI() {
+      const total = clinicalQuestions.length;
+      const answered = Object.keys(answers).length;
+      const percent = total ? Math.round((answered / total) * 100) : 0;
+
+      document.getElementById('progressFill').style.width = percent + '%';
+      document.getElementById('progressLabel').textContent = `Progress · ${percent}%`;
+
+      if (currentQuestion < total) {
+        document.getElementById('questionCounter').textContent = `Question ${currentQuestion + 1} of ${total}`;
+      } else {
+        document.getElementById('questionCounter').textContent = 'Reviewing results';
+      }
+    }
+
+    function showQuestion(index) {
+      if (index >= clinicalQuestions.length) {
+        showResults();
+        return;
+      }
+
+      currentQuestion = index;
+      const question = clinicalQuestions[index];
+      const progress = ((index + 1) / clinicalQuestions.length) * 100;
+
+      updateProgressUI();
+
+      const container = document.getElementById('questionContainer');
+      container.style.display = 'block';
+
+      const html = `
+        <div class="step-label">Question ${index + 1} of ${clinicalQuestions.length} · PHQ-9 & GAD-7 Clinical Screening</div>
+        <h2>${question.text}</h2>
+        <p class="sub">Over the last 2 weeks, how often have you been bothered by:</p>
+
+        <div id="optionsContainer">
+          ${optionsPHQ.map((opt, i) => `
+            <div class="scale-row" style="margin-bottom:8px;">
+              <div class="scale-option" style="flex:initial; min-width:100%;">
+                <input type="radio" name="q${question.id}" id="opt${i}" value="${opt.v}">
+                <label for="opt${i}">${opt.t}</label>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div id="questionError" class="error">Please select an answer.</div>
+
+        <div class="footer-actions">
+          ${index > 0 ? '<button class="btn-secondary" onclick="previousQuestion()"><i class="fas fa-arrow-left"></i> Back</button>' : '<span style="flex:1;"></span>'}
+          <button class="btn-primary" onclick="nextQuestion()">Continue <i class="fas fa-arrow-right"></i></button>
+        </div>
+      `;
+
+      container.innerHTML = html;
+
+      // Restore previous answer if exists
+      if (answers[question.id] !== undefined) {
+        const radio = container.querySelector(`input[value="${answers[question.id]}"]`);
+        if (radio) radio.checked = true;
+      }
+
+      // Add listeners to options
+      container.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          answers[question.id] = parseInt(radio.value, 10);
+          document.getElementById('questionError').style.display = 'none';
+
+          if (question.critical && parseInt(radio.value, 10) >= 1) {
+            setTimeout(() => showEmergencyModal(), 500);
+          }
+
+          saveState();
+        });
+      });
+    }
+
+    function nextQuestion() {
+      const question = clinicalQuestions[currentQuestion];
+      const err = document.getElementById('questionError');
+
+      if (answers[question.id] === undefined) {
+        err.style.display = 'block';
+        return;
+      }
+      err.style.display = 'none';
+
+      showQuestion(currentQuestion + 1);
+    }
+
+    function previousQuestion() {
+      if (currentQuestion > 0) {
+        showQuestion(currentQuestion - 1);
+      }
+    }
+
+    function showEmergencyModal() {
+      document.getElementById('emergencyModal').classList.add('active');
+    }
+
+    function closeEmergencyModal() {
+      document.getElementById('emergencyModal').classList.remove('active');
+    }
+
+    function getPhq9Severity(score) {
+      if (score <= 4) return "Minimal";
+      if (score <= 9) return "Mild";
+      if (score <= 14) return "Moderate";
+      if (score <= 19) return "Moderately Severe";
+      return "Severe";
+    }
+
+    function getGad7Severity(score) {
+      if (score <= 4) return "Minimal";
+      if (score <= 9) return "Mild";
+      if (score <= 14) return "Moderate";
+      return "Severe";
+    }
+
+    function classifyUser(phq9Score, gad7Score, categoryScores) {
+      // 1. High Risk / Crisis-Sensitive (Type D)
+      if (
+        categoryScores.suicide_risk >= 1 ||
+        phq9Score >= 15 ||
+        gad7Score >= 15
+      ) return "high_risk";
+
+      // 2. Moderate Clinical Symptoms (Type C)
+      if (
+        phq9Score >= 10 ||
+        gad7Score >= 10
+      ) return "moderate_clinical";
+
+      // 3. Mild Distress / Early Warning (Type B)
+      if (
+        phq9Score >= 5 ||
+        gad7Score >= 5
+      ) return "mild_distress";
+
+      // 4. Stable / Preventive Care (Type A)
+      return "stable";
+    }
+
+    function getRecommendedTools(userType, isTraumaHeavy, isLonely) {
+      const tools = [];
+
+      // Base recommendations by profile
+      if (userType === "high_risk") {
+        tools.push({ name: "Crisis Support", url: "sos.html", icon: "fa-life-ring", desc: "Immediate help resources" });
+        tools.push({ name: "Counselor Directory", url: "counselors.html", icon: "fa-user-md", desc: "Connect with a professional" });
+        tools.push({ name: "Calming Music", url: "music.html", icon: "fa-music", desc: "Soothing soundscapes" });
+      } else if (userType === "moderate_clinical") {
+        tools.push({ name: "Find a Therapist", url: "counselors.html", icon: "fa-user-md", desc: "Professional guidance" });
+        tools.push({ name: "Mood Journal", url: "journal.html", icon: "fa-book-medical", desc: "Track your feelings" });
+        tools.push({ name: "Tap to Breathe", url: "tap-breathe.html", icon: "fa-lungs", desc: "Regulate anxiety" });
+      } else if (userType === "mild_distress") {
+        tools.push({ name: "Tap to Breathe", url: "tap-breathe.html", icon: "fa-lungs", desc: "Quick stress relief" });
+        tools.push({ name: "Sand Healing", url: "sand-draw.html", icon: "fa-hourglass", desc: "Creative distraction" });
+        tools.push({ name: "Yoga Flow", url: "yoga.html", icon: "fa-pray", desc: "Gentle movement" });
+      } else { // Stable
+        tools.push({ name: "Daily Journal", url: "journal.html", icon: "fa-pen-fancy", desc: "Practice gratitude" });
+        tools.push({ name: "Zen Sudoku", url: "zen-sudoku.html", icon: "fa-border-all", desc: "Mindful focus" });
+        tools.push({ name: "Positivity Board", url: "positivity.html", icon: "fa-sun", desc: "Daily inspiration" });
+      }
+
+      // Modifier injections (Add if space permits or swap)
+      if (isLonely) {
+        // Add Chatbot if not high risk (high risk needs human)
+        if (userType !== "high_risk") {
+          tools.unshift({ name: "AI Companion", url: "chatbot2.html", icon: "fa-robot", desc: "Vent freely anytime" });
+        }
+      }
+
+      if (isTraumaHeavy) {
+        tools.push({ name: "Safe Space", url: "bubble-pop.html", icon: "fa-soap", desc: "Gentle sensory relief" });
+      }
+
+      // Limit to 4 max to keep UI clean
+      return tools.slice(0, 4);
+    }
+
+    function showResults() {
+      document.getElementById('questionContainer').style.display = 'none';
+
+      // Calculate scores by category
+      clinicalQuestions.forEach(q => {
+        if (answers[q.id] !== undefined) {
+          categoryScores[q.category] += answers[q.id];
+        }
+      });
+
+      const phq9Score = categoryScores.depression + categoryScores.self_worth + categoryScores.suicide_risk;
+      const gad7Score = categoryScores.anxiety;
+      const traumaScore = categoryScores.trauma + categoryScores.grief_loss;
+      const totalScore = phq9Score + gad7Score + traumaScore + categoryScores.loneliness + categoryScores.functional_impairment;
+
+      const phq9Severity = getPhq9Severity(phq9Score);
+      const gad7Severity = getGad7Severity(gad7Score);
+
+      // --- NEW CLASSIFICATION LOGIC ---
+      const userType = classifyUser(phq9Score, gad7Score, categoryScores);
+
+      // Secondary Modifiers
+      const isTraumaHeavy = (categoryScores.trauma + categoryScores.grief_loss) >= 3;
+      const isLonely = categoryScores.loneliness >= 2;
+
+      // Determine primary category (legacy support)
+      let primaryCategory = 'depression';
+      if (phq9Score >= gad7Score && phq9Score >= traumaScore) {
+        primaryCategory = 'depression';
+      } else if (gad7Score > phq9Score && gad7Score >= traumaScore) {
+        primaryCategory = 'anxiety';
+      } else if (traumaScore > phq9Score && traumaScore > gad7Score) {
+        primaryCategory = categoryScores.grief_loss > categoryScores.trauma ? 'grief_loss' : 'trauma';
+      }
+
+      // Legacy level support
+      let level = "low";
+      if (userType === "high_risk" || userType === "moderate_clinical") level = "high";
+      else if (userType === "mild_distress") level = "moderate";
+
+      // Save comprehensive assessment data
+      const assessmentData = {
+        phq9Score,
+        gad7Score,
+        traumaScore,
+        lonelinessScore: categoryScores.loneliness,
+        functionalScore: categoryScores.functional_impairment,
+        totalScore,
+        phq9Severity,
+        gad7Severity,
+        level, // kept for backward compatibility
+        userType, // NEW: stable, mild_distress, moderate_clinical, high_risk
+        isTraumaHeavy,
+        isLonely,
+        primaryCategory,
+        userEmail: localStorage.getItem('mh_user') || sessionStorage.getItem('mh_user'),
+        createdAt: new Date().toISOString()
+      };
+
+      localStorage.setItem("mh_stress_assessment", JSON.stringify(assessmentData));
+      localStorage.setItem("mh_user_type", userType); // Direct access for other pages
+      if (isTraumaHeavy) localStorage.setItem("mh_modifier_trauma", "true");
+      if (isLonely) localStorage.setItem("mh_modifier_loneliness", "true");
+
+      clearState();
+
+      // Display results
+      const resultsSection = document.getElementById('resultsSection');
+      resultsSection.style.display = 'block';
+
+      // Dynamic Result Text Based on User Type
+      let resultHeadline = "Your Wellness Profile";
+      let resultDescription = "Here is a breakdown of your current mental well-being.";
+      let resultColor = "#0369a1";
+
+      if (userType === "high_risk") {
+        resultHeadline = "Safety-Focused Care";
+        resultDescription = "Your responses indicate you're navigating a tough moment. Prioritizing safety and support is key right now.";
+        resultColor = "#dc2626";
+      } else if (userType === "moderate_clinical") {
+        resultHeadline = "Moderate Distress";
+        resultDescription = "You are carrying a significant emotional load. Structured support and possibly speaking to a professional would be very beneficial.";
+        resultColor = "#d97706";
+      } else if (userType === "mild_distress") {
+        resultHeadline = "Mild Distress";
+        resultDescription = "You're experiencing some stress or anxiety. It's a great time to use self-care tools to prevent things from building up.";
+        resultColor = "#059669";
+      } else {
+        resultHeadline = "Emotionally Stable";
+        resultDescription = "You seem to be doing well! Focus on preventive care and personal growth to maintain this balance.";
+        resultColor = "#047857";
+      }
+
+      // Get Recommendations
+      const recommendedTools = getRecommendedTools(userType, isTraumaHeavy, isLonely);
+
+      resultsSection.innerHTML = `
+        <div class="step-label">Assessment Complete</div>
+        <h2 style="color:${resultColor}">${resultHeadline}</h2>
+        <p class="sub">${resultDescription}</p>
+
+        ${userType === 'high_risk' ? `
+        <div style="background:#fee2e2;border:2px solid #dc2626;border-radius:12px;padding:16px;margin:16px 0;">
+          <strong style="color:#991b1b;"><i class="fas fa-exclamation-circle"></i> We recommend professional support</strong><br>
+          <p style="color:#7f1d1d;margin-top:8px;font-size:0.88rem;">Your scores indicate elevated symptoms. Please consider reaching out to a mental health professional.</p>
+        </div>
+        ` : ''}
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0;">
+          <div style="background:linear-gradient(135deg,${phq9Score >= 10 ? '#fee2e2,#fecaca' : '#f0f9ff,#e0f2fe'});border:2px solid ${phq9Score >= 10 ? '#f87171' : '#7dd3fc'};border-radius:16px;padding:20px;text-align:center;">
+            <div style="font-size:42px;font-weight:700;color:${phq9Score >= 10 ? '#dc2626' : '#0369a1'};">${phq9Score}<span style="font-size:20px;">/27</span></div>
+            <div style="font-size:12px;color:#64748b;font-weight:600;text-transform:uppercase;margin-top:4px;">PHQ-9 Depression</div>
+            <div style="font-size:14px;font-weight:700;margin-top:6px;">${phq9Severity}</div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,${gad7Score >= 10 ? '#fee2e2,#fecaca' : '#f0f9ff,#e0f2fe'});border:2px solid ${gad7Score >= 10 ? '#f87171' : '#7dd3fc'};border-radius:16px;padding:20px;text-align:center;">
+            <div style="font-size:42px;font-weight:700;color:${gad7Score >= 10 ? '#dc2626' : '#0369a1'};">${gad7Score}<span style="font-size:20px;">/21</span></div>
+            <div style="font-size:12px;color:#64748b;font-weight:600;text-transform:uppercase;margin-top:4px;">GAD-7 Anxiety</div>
+            <div style="font-size:14px;font-weight:700;margin-top:6px;">${gad7Severity}</div>
+          </div>
+        </div>
+
+        <div style="margin: 30px 0;">
+          <h3 style="font-size:1.1rem; margin-bottom:12px; color:var(--text-dark);">Recommended Tools for You</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+            ${recommendedTools.map(tool => `
+              <a href="${tool.url}" style="text-decoration:none; color:inherit; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:15px; transition:transform 0.2s; display:flex; flex-direction:column; align-items:center; text-align:center;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+                <div style="width:40px; height:40px; background:var(--accent-soft); color:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+                  <i class="fas ${tool.icon}"></i>
+                </div>
+                <div style="font-weight:700; font-size:0.9rem;">${tool.name}</div>
+                <div style="font-size:0.75rem; color:#64748b; margin-top:4px;">${tool.desc}</div>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+
+        ${isTraumaHeavy ? `<div style="padding:10px 15px; background:#f5f3ff; border:1px solid #ddd6fe; border-radius:8px; display:inline-block; font-size:0.85rem; color:#6d28d9; margin-bottom:15px;"><i class="fas fa-heart-broken"></i> Trauma-informed care recommended</div>` : ''}
+        ${isLonely ? `<div style="padding:10px 15px; background:#f0f9ff; border:1px solid #bae6fd; border-radius:8px; display:inline-block; font-size:0.85rem; color:#0369a1; margin-bottom:15px;"><i class="fas fa-users"></i> Community connection recommended</div>` : ''}
+
+        <p class="sub" style="margin:16px 0;">
+          All your results are private. We've updated your healing journey based on this profile.
+        </p>
+
+        <div class="footer-actions" style="justify-content:center;">
+          <button class="btn-primary" onclick="window.location.href='healing-journey.html'">
+            Begin My Healing Journey <i class="fas fa-arrow-right"></i>
+          </button>
+          
+        </div>
+      `;
+
+      updateProgressUI();
+    }
+
+    // Initialize
+    updateProgressUI();
+  </script>
+</body>
+
+</html>

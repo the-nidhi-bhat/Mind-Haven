@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mandala Art | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="mandala-art.css">
+</head>
+
+<body>
+
+    <div class="header-bar"><a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i>Back to Games</a>
+        <div style="color: white; font-weight: 700; opacity: 0.9;">Mandala Art Creator</div>
+    </div><canvas id="canvas"></canvas>
+    <div class="info-overlay" id="infoText">Draw to create symmetrical flowing art </div>
+    <div class="controls"><button class="control-btn" onclick="clearCanvas()"><i class="fas fa-eraser"></i>Clear
+        </button><button class="control-btn" onclick="saveArt()"><i class="fas fa-download"></i>Save </button></div>
+    <div class="symmetry-controls"><button class="symmetry-btn" onclick="setSymmetry(2)">2</button><button
+            class="symmetry-btn" onclick="setSymmetry(4)">4</button><button class="symmetry-btn active"
+            onclick="setSymmetry(6)">6</button><button class="symmetry-btn" onclick="setSymmetry(8)">8</button><button
+            class="symmetry-btn" onclick="setSymmetry(12)">12</button></div>
+    <div class="color-palette">
+        <div class="color-option active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+            data-hue="250"></div>
+        <div class="color-option" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" data-hue="330">
+        </div>
+        <div class="color-option" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" data-hue="190">
+        </div>
+        <div class="color-option" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)" data-hue="160">
+        </div>
+        <div class="color-option" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%)" data-hue="30">
+        </div>
+        <div class="color-option" style="background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%)" data-hue="0">
+        </div>
+    </div>
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+        <p>✨ Express your inner colors 🎨 ✨</p>
+    </div>
+    <script src="mandala-art.js"></script>
+</body>
+
+</html>

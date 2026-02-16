@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tap & Breathe | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="tap-breathe.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+        <!-- Theme Toggle hidden for now, inherits from games.html -->
+    </div>
+
+    <div class="game-container">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="cycles">0</div>
+                <div class="stat-label">Cycles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="duration">0:00</div>
+                <div class="stat-label">Time</div>
+            </div>
+        </div>
+
+        <div class="breath-wrapper">
+            <!-- Decorative Rings -->
+            <div class="breath-ring" style="transform: scale(1.2); opacity: 0.3;"></div>
+            <div class="breath-ring" style="transform: scale(1.4); opacity: 0.1;"></div>
+
+            <div class="breath-circle" id="breathCircle">
+                <div class="breath-text" id="breathText">Tap to<br>Start</div>
+            </div>
+        </div>
+
+        <div class="instruction" id="instruction">
+            Find a comfortable position and tap to begin
+        </div>
+
+        <div class="controls">
+            <button class="control-btn active" onclick="setPattern('4-4-4-4')" id="btn-4-4-4-4">
+                Box (4-4-4-4)
+            </button>
+            <button class="control-btn" onclick="setPattern('4-7-8')" id="btn-4-7-8">
+                Relax (4-7-8)
+            </button>
+            <button class="control-btn" onclick="setPattern('5-5')" id="btn-5-5">
+                Balance (5-5)
+            </button>
+        </div>
+    </div>
+
+    <script src="tap-breathe.js"></script>
+</body>
+
+</html>

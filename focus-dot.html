@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Focus Dots | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="focus-dot.css">
+</head>
+
+<body>
+
+    <div class="header-bar">
+        <a href="games.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Games</a>
+    </div>
+
+    <div class="hud">
+        <div class="hud-item">
+            <div class="hud-value" id="score">0</div>
+            <div class="hud-label">Score</div>
+        </div>
+        <div class="hud-item" style="width: 1px; background: var(--glass-border); margin: 0 10px;"></div>
+        <div class="hud-item">
+            <div class="hud-value" id="timer">0:00</div>
+            <div class="hud-label">Time</div>
+        </div>
+    </div>
+
+    <div class="game-area" id="gameArea">
+        <!-- Balls will spawn here -->
+    </div>
+
+    <div class="controls">
+        <button class="btn active" id="btn-slow" onclick="setSpeed('slow')">Zen</button>
+        <button class="btn" id="btn-medium" onclick="setSpeed('medium')">Focus</button>
+        <button class="btn" id="btn-fast" onclick="setSpeed('fast')">Flow</button>
+        <div style="width: 1px; background: var(--glass-border); margin: 0 5px;"></div>
+        <button class="btn" onclick="resetGame()"><i class="fas fa-redo"></i></button>
+    </div>
+
+    <script src="focus-dot.js"></script>
+</body>
+
+</html>

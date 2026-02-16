@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Wellness Chatbot</title>
+    <link rel="stylesheet" href="chatstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font imports handled in CSS -->
+</head>
+
+<body>
+
+    <div class="mindful-buddies"></div>
+
+    <div class="app-container">
+        <header>
+            <a href="journey.html" class="back-btn" title="Back to Journey">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h1>chat bot</h1>
+            <p>I'm here to listen and help you relax.</p>
+            <button id="themeToggle" class="theme-toggle-header" title="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </header>
+
+        <div id="chat-container" class="chat-box">
+            <div class="bot-msg"><b>Bot:</b> Hello! I'm your mindful companion. How are you feeling right now?</div>
+        </div>
+
+        <div class="input-area">
+            <button id="mic-btn" class="icon-btn" onclick="startListening()" title="Speak to Bot">
+                🎤
+            </button>
+
+            <input type="text" id="user-input" placeholder="Type your feelings here..."
+                onkeypress="if(event.key === 'Enter') handleSendMessage()">
+
+            <button id="send-btn" class="icon-btn" onclick="handleSendMessage()">
+                🚀
+            </button>
+        </div>
+
+        <!-- LIFE ARCHITECT POPUP (Hidden by default) -->
+        <div id="life-popup" class="popup-overlay hidden">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <h2>🏛️ Life Architect</h2>
+                    <button class="close-btn" onclick="closePopup()">&times;</button>
+                </div>
+                <div class="popup-body">
+                    <div class="popup-section">
+                        <h3>📅 Day Planner</h3>
+                        <ul id="popup-planner-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>🌟 Bucket List & Tasks</h3>
+                        <ul id="popup-tasks-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>🔄 Habits</h3>
+                        <ul id="popup-habits-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>💡 Idea Vault</h3>
+                        <ul id="popup-ideas-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>📜 History Log</h3>
+                        <ul id="popup-history-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>🎤 Voice Vault (Notes)</h3>
+                        <ul id="popup-voice-list"></ul>
+                    </div>
+                    <div class="popup-section">
+                        <h3>🏋️ Offline Section</h3>
+                        <ul id="popup-offline-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="chatresponse.js" defer></script>
+
+    <script src="chatlogic_v2.js" defer></script>
+
+</body>
+
+</html>

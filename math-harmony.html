@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <title>Math Harmony | Mindful Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+            --sage-dark: #5a6b56;
+            --bg-secondary: #ffffff;
+            --text-dark: #111827;
+            --accent: #6366f1;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --sage-gradient: linear-gradient(135deg, #1a1d2e 0%, #1f2937 100%);
+            --sage-dark: #94a3b8;
+            --bg-secondary: #0f172a;
+            --text-dark: #f1f5f9;
+            --accent: #8b5cf6;
+            --glass-bg: rgba(26, 29, 46, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--sage-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-exit {
+            padding: 10px 24px;
+            background: var(--text-dark);
+            color: var(--bg-secondary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .game-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .math-card {
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .score-pill {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem {
+            font-family: 'Playfair Display';
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 20px 0 40px;
+            color: var(--text-dark);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #111827;
+            /* Force dark text */
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 1 !important;
+            /* Ensure visibility */
+        }
+
+        [data-theme="dark"] .option-btn {
+            background: rgba(30, 41, 59, 0.8);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .option-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .option-btn.correct {
+            background: #10b981 !important;
+            color: white !important;
+            border-color: #10b981 !important;
+        }
+
+        .option-btn.wrong {
+            background: #ef4444 !important;
+            color: white !important;
+            border-color: #ef4444 !important;
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-8px);
+            }
+
+            75% {
+                transform: translateX(8px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .math-card {
+                padding: 25px 20px;
+            }
+
+            .problem {
+                font-size: 3rem;
+                margin: 15px 0 30px;
+            }
+
+            .option-btn {
+                padding: 15px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="logo"><i class="fas fa-brain"></i> Mindful Haven</a>
+        <a href="games.html" class="btn-exit">Back</a>
+    </nav>
+
+    <div class="game-container">
+        <div class="math-card" id="card">
+            <div class="score-pill">Score: <span id="score">0</span></div>
+            <div class="problem" id="problem">2 + 2 = ?</div>
+            <div class="options-grid" id="options">
+                <!-- Options injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const problemEl = document.getElementById('problem');
+        const optionsEl = document.getElementById('options');
+        const scoreEl = document.getElementById('score');
+
+        // Audio Engine
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, type = 'sine') {
+            if (actx.state === 'suspended') actx.resume();
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.frequency.setValueAtTime(freq, actx.currentTime);
+            osc.type = type;
+            gain.gain.setValueAtTime(0.1, actx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.3);
+            osc.connect(gain); gain.connect(actx.destination);
+            osc.start(); osc.stop(actx.currentTime + 0.3);
+        }
+
+        let score = 0;
+        let currentResult = 0;
+        let isProcessing = false;
+
+        function generateProblem() {
+            isProcessing = false;
+            // Diffculty scaling? Keep it simple for now.
+            const type = Math.random() > 0.5 ? '+' : (Math.random() > 0.5 ? '-' : 'x');
+            let a, b;
+
+            if (type === 'x') {
+                a = Math.floor(Math.random() * 9) + 2; // 2-10
+                b = Math.floor(Math.random() * 9) + 2;
+                currentResult = a * b;
+            } else if (type === '-') {
+                currentResult = Math.floor(Math.random() * 20) + 1;
+                b = Math.floor(Math.random() * 20) + 1;
+                a = currentResult + b; // Ensure a > b
+            } else {
+                a = Math.floor(Math.random() * 50) + 1;
+                b = Math.floor(Math.random() * 50) + 1;
+                currentResult = a + b;
+            }
+
+            problemEl.innerText = `${a} ${type === 'x' ? '×' : type} ${b}`;
+
+            // Generate Answers
+            let answers = [currentResult];
+            while (answers.length < 4) {
+                let offset = Math.floor(Math.random() * 10) + 1;
+                if (Math.random() > 0.5) offset = -offset;
+                const fake = currentResult + offset;
+                if (fake > 0 && !answers.includes(fake)) answers.push(fake);
+            }
+
+            // Shuffle
+            answers.sort(() => Math.random() - 0.5);
+
+            optionsEl.innerHTML = '';
+            answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = ans;
+                btn.onclick = () => checkAnswer(btn, ans);
+                optionsEl.appendChild(btn);
+            });
+
+            // Animate in - removed opacity fade to ensure full visibility
+            gsap.from('.option-btn', {
+                y: 20, duration: 0.3, stagger: 0.05, ease: 'back.out'
+            });
+        }
+
+        function checkAnswer(btn, val) {
+            if (isProcessing) return;
+            isProcessing = true;
+
+            if (val === currentResult) {
+                // Correct
+                btn.classList.add('correct');
+                score += 10;
+                scoreEl.innerText = score;
+                playTone(660);
+                setTimeout(() => playTone(880), 100);
+
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.7 },
+                    colors: ['#10b981', '#6366f1']
+                });
+
+                setTimeout(generateProblem, 800);
+            } else {
+                // Wrong
+                btn.classList.add('wrong');
+                playTone(200, 'square');
+                setTimeout(() => {
+                    btn.classList.remove('wrong');
+                    isProcessing = false;
+                }, 500);
+            }
+        }
+
+        generateProblem();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,575 @@
+:root {
+    /* Light Mode */
+    --sage-gradient: linear-gradient(135deg, #c9dcc4 0%, #d4c5e8 100%);
+    --sage-dark: #5a6b56;
+    --sage-light: #e8f3e5;
+    --lavender: #d4c5e8;
+    --bg-primary: #f9fafb;
+    --bg-secondary: #ffffff;
+    --text-dark: #111827;
+    --text-muted: #6b7280;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --border-light: #e5e7eb;
+    --glass-bg: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] {
+    /* Dark Mode */
+    --sage-gradient: linear-gradient(135deg, #1a1d2e 0%, #1f2937 100%);
+    --sage-dark: #94a3b8;
+    --sage-light: #1e293b;
+    --lavender: #6366f1;
+    --bg-primary: #0f1419;
+    --bg-secondary: #1a1d2e;
+    --text-dark: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent: #8b5cf6;
+    --accent-soft: #312e81;
+    --border-light: #2d3748;
+    --glass-bg: rgba(26, 29, 46, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--sage-dark);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo i {
+    font-size: 1.5rem;
+}
+
+.nav-right {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--glass-bg);
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-back {
+    background: var(--text-dark);
+    color: var(--bg-primary);
+    padding: 10px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero with Botanical Decorations & Game Icon */
+.hero {
+    min-height: 40vh;
+    background: var(--sage-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 8%;
+    position: relative;
+    overflow: hidden;
+}
+
+.botanical-left,
+.botanical-right {
+    position: absolute;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.botanical-left {
+    left: -50px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+}
+
+.botanical-right {
+    right: -50px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+}
+
+[data-theme="dark"] .botanical-left,
+[data-theme="dark"] .botanical-right {
+    opacity: 0.15;
+}
+
+.mindful-buddies {
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 140px;
+    height: 100px;
+    z-index: 1;
+    opacity: 0.9;
+    pointer-events: none;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><g transform="translate(80, 100)"><ellipse cx="0" cy="0" rx="35" ry="45" fill="%23ffc9b5" /><path d="M-35,-15 Q0,-45 35,-15" fill="%235a6b56" /><ellipse cx="-20" cy="-25" rx="12" ry="8" fill="%2387a383" transform="rotate(-20)" /><ellipse cx="20" cy="-25" rx="12" ry="8" fill="%2387a383" transform="rotate(20)" /><path d="M-10,5 Q-5,8 0,5 M10,5 Q15,8 20,5" stroke="%23374151" stroke-width="2" fill="none" opacity="0.6"/><path d="M-5,20 Q5,28 15,20" stroke="%23374151" stroke-width="2" fill="none" /></g><g transform="translate(200, 110)"><ellipse cx="0" cy="0" rx="38" ry="48" fill="%23ffc9b5" /><path d="M-38,-15 Q0,-48 38,-15" fill="%235a6b56" /><ellipse cx="-22" cy="-28" rx="14" ry="9" fill="%2387a383" transform="rotate(-15)" /><ellipse cx="22" cy="-28" rx="14" ry="9" fill="%2387a383" transform="rotate(15)" /><path d="M-12,5 Q-6,8 0,5 M12,5 Q18,8 24,5" stroke="%23374151" stroke-width="2" fill="none" opacity="0.6"/><path d="M-6,22 Q6,30 18,22" stroke="%23374151" stroke-width="2" fill="none" /></g><circle cx="40" cy="40" r="10" fill="%23d4c5e8" opacity="0.5" /><circle cx="260" cy="160" r="8" fill="%23d4c5e8" opacity="0.5" /></svg>') no-repeat center/contain;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+}
+
+@keyframes fadeInBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.affirmation-bubble {
+    position: absolute;
+    bottom: 115px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
+    backdrop-filter: blur(16px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    padding: 16px 22px;
+    max-width: 260px;
+    z-index: 3;
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeInBounce 1.2s ease-out 0.8s both;
+}
+
+[data-theme="dark"] .affirmation-bubble {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.affirmation-bubble p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 1;
+    position: relative;
+}
+
+.hero-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+/* Floating Game Icon */
+.hero-visual {
+    z-index: 1;
+    position: relative;
+}
+
+.hero-visual i {
+    font-size: 120px;
+    color: rgba(99, 102, 241, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+
+[data-theme="dark"] .hero-visual i {
+    color: rgba(139, 92, 246, 0.4);
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+/* Main Content */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 8%;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: "Playfair Display", serif;
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+/* Game Section */
+.game-section {
+    margin-bottom: 60px;
+}
+
+/* Horizontal Scrollable Cards */
+.games-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 5px 30px 5px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-soft) transparent;
+}
+
+.games-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.games-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.games-scroll::-webkit-scrollbar-thumb {
+    background: var(--accent-soft);
+    border-radius: 10px;
+}
+
+.games-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Game Card - Rounded Pill Style */
+.game-card {
+    min-width: 200px;
+    height: 140px;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.game-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.game-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-top: auto;
+}
+
+/* Light Mode Card Colors - Pastel */
+.card-blue {
+    background: linear-gradient(135deg, #cdd8f0 0%, #c4d3f5 100%);
+}
+
+.card-green {
+    background: linear-gradient(135deg, #b8d4c2 0%, #c9e4c8 100%);
+}
+
+.card-mint {
+    background: linear-gradient(135deg, #bcf0dd 0%, #d0f5e8 100%);
+}
+
+.card-purple {
+    background: linear-gradient(135deg, #d8cfe8 0%, #e4ddf0 100%);
+}
+
+.card-pink {
+    background: linear-gradient(135deg, #f0d8e8 0%, #f5e4f0 100%);
+}
+
+.card-yellow {
+    background: linear-gradient(135deg, #f5ecd0 0%, #fdf5d8 100%);
+}
+
+.card-peach {
+    background: linear-gradient(135deg, #f0ddd0 0%, #f5e8dd 100%);
+}
+
+.card-lavender {
+    background: linear-gradient(135deg, #dcd8f0 0%, #e8e4f5 100%);
+}
+
+.card-sage {
+    background: linear-gradient(135deg, #d0ddc8 0%, #dde8d8 100%);
+}
+
+/* Dark Mode Card Colors - Deep & Vibrant */
+[data-theme="dark"] .card-blue {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+}
+
+[data-theme="dark"] .card-green {
+    background: linear-gradient(135deg, #14532d 0%, #15803d 100%);
+}
+
+[data-theme="dark"] .card-mint {
+    background: linear-gradient(135deg, #134e4a 0%, #0f766e 100%);
+}
+
+[data-theme="dark"] .card-purple {
+    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+}
+
+[data-theme="dark"] .card-pink {
+    background: linear-gradient(135deg, #831843 0%, #9f1239 100%);
+}
+
+[data-theme="dark"] .card-yellow {
+    background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+}
+
+[data-theme="dark"] .card-peach {
+    background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+}
+
+[data-theme="dark"] .card-lavender {
+    background: linear-gradient(135deg, #3730a3 0%, #4338ca 100%);
+}
+
+[data-theme="dark"] .card-sage {
+    background: linear-gradient(135deg, #365314 0%, #3f6212 100%);
+}
+
+/* Light mode - darker text on cards */
+.game-card .game-icon {
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.game-card .game-name {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+/* Dark mode - white text on cards */
+[data-theme="dark"] .game-card .game-icon {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .game-card .game-name {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Footer */
+footer {
+    background: var(--bg-secondary);
+    padding: 40px 8%;
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 50px 8%;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-visual i {
+        font-size: 80px;
+        margin-bottom: 20px;
+    }
+
+    .game-card {
+        min-width: 180px;
+        height: 130px;
+    }
+
+    .botanical-left,
+    .botanical-right {
+        display: none;
+    }
+
+    .mindful-buddies {
+        display: none;
+    }
+}
+
+/* Mobile Bar */
+.mobile-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    display: none;
+    justify-content: space-around;
+    padding: 12px 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    border-top: 1px solid var(--border-light);
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+}
+
+.nav-item.active {
+    color: var(--accent);
+}
+
+@media(max-width: 768px) {
+    .mobile-bar {
+        display: flex;
+    }
+
+    body {
+        padding-bottom: 80px;
+    }
+
+    .nav-right .btn-back {
+        display: none;
+        /* Hide top dashboard button on mobile to save space if needed, or keep it. Let's keep it but maybe minimize text? */
+    }
+
+    /* Adjust top nav for mobile */
+    .btn-back {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8" />
+  <title>Mood Tracker | Mindful Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="mood-tracker.css">
+</head>
+
+<body>
+  <nav>
+    <a href="journey.html" class="logo" style="text-decoration:none; color:inherit;"><i class="fas fa-brain"></i>
+      Mindful Haven</a>
+    <ul class="nav-center">
+      <li><a href="journey.html">Dashboard</a></li>
+      <li><a href="healing-journey.html">Journey</a></li>
+      <li><a href="mood-tracker.html" class="active">Mood</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="crisis.html">Crisis</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-toggle" id="themeToggle" data-theme="light">
+        <i class="fas fa-sun"></i>
+        <span>Light</span>
+      </div>
+      <a href="counselors.html"><i class="fas fa-user-md"></i> Support</a>
+    </div>
+  </nav>
+
+  <section class="hero-strip">
+    <div class="botanical-left"></div>
+    <div class="botanical-right"></div>
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>✨ How are you feeling today? ✨</p>
+    </div>
+    <div class="hero-inner">
+      <h1 class="hero-title">Daily Mood Tracker</h1>
+      <p class="hero-sub">Track your emotions to identify patterns, triggers, and gain self-awareness</p>
+    </div>
+  </section>
+
+  <main class="main">
+    <div class="main-inner">
+      <!-- Stats Dashboard -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="totalEntries">0</div>
+          <div class="stat-label">Total Check-ins</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="avgMood">--</div>
+          <div class="stat-label">Avg Mood (7d)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="bestDay">--</div>
+          <div class="stat-label">Best Day</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="checkInStreak">0</div>
+          <div class="stat-label">Check-in Days</div>
+        </div>
+      </div>
+
+      <!-- Log Mood -->
+      <div class="card">
+        <h3>How are you feeling right now?</h3>
+        <p class="sub">Select the emoji that best represents your current mood</p>
+
+        <div class="mood-scale" id="moodScale">
+          <div class="mood-btn" data-mood="1" title="Very bad">
+            😢
+            <span class="mood-label">Very Bad</span>
+          </div>
+          <div class="mood-btn" data-mood="2" title="Bad">
+            😟
+            <span class="mood-label">Bad</span>
+          </div>
+          <div class="mood-btn" data-mood="3" title="Okay">
+            😐
+            <span class="mood-label">Okay</span>
+          </div>
+          <div class="mood-btn" data-mood="4" title="Good">
+            🙂
+            <span class="mood-label">Good</span>
+          </div>
+          <div class="mood-btn" data-mood="5" title="Great">
+            😊
+            <span class="mood-label">Great</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Energy Level</label>
+          <select id="energyLevel">
+            <option value="">Select your energy level</option>
+            <option value="1">Very Low</option>
+            <option value="2">Low</option>
+            <option value="3">Moderate</option>
+            <option value="4">High</option>
+            <option value="5">Very High</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label>What influenced your mood? (Select all that apply)</label>
+          <div class="factors-grid" id="factorsGrid">
+            <div class="factor-checkbox">
+              <input type="checkbox" id="sleep" value="sleep">
+              <label for="sleep"><i class="fas fa-bed"></i> Sleep Quality</label>
+            </div>
+            <div class="factor-checkbox">
+              <input type="checkbox" id="exercise" value="exercise">
+              <label for="exercise"><i class="fas fa-running"></i> Exercise</label>
+            </div>
+            <div class="factor-checkbox">
+              <input type="checkbox" id="social" value="social">
+              <label for="social"><i class="fas fa-users"></i> Social Time</label>
+            </div>
+            <div class="factor-checkbox">
+              <input type="checkbox" id="work" value="work">
+              <label for="work"><i class="fas fa-briefcase"></i> Work Stress</label>
+            </div>
+            <div class="factor-checkbox">
+              <input type="checkbox" id="weather" value="weather">
+              <label for="weather"><i class="fas fa-cloud-sun"></i> Weather</label>
+            </div>
+            <div class="factor-checkbox">
+              <input type="checkbox" id="food" value="food">
+              <label for="food"><i class="fas fa-utensils"></i> Meals</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Additional notes (optional)</label>
+          <textarea id="moodNote"
+            placeholder="Any specific thoughts, events, or feelings you want to remember..."></textarea>
+        </div>
+
+        <button class="btn-primary" id="saveMood">Save Mood Check-in</button>
+      </div>
+
+      <!-- Mood Visualization -->
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div>
+            <h3>Mood Trends</h3>
+            <p class="sub">Visualize your emotional patterns over time</p>
+          </div>
+          <div class="period-selector">
+            <button class="period-btn active" data-period="7" onclick="changePeriod(7)">7 Days</button>
+            <button class="period-btn" data-period="14" onclick="changePeriod(14)">14 Days</button>
+            <button class="period-btn" data-period="30" onclick="changePeriod(30)">30 Days</button>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <svg class="chart-svg" id="moodChart" viewBox="0 0 800 200" preserveAspectRatio="none"></svg>
+        </div>
+      </div>
+
+      <!-- Pattern Insights -->
+      <div class="card" id="insightsCard" style="display:none;">
+        <h3>Pattern Insights</h3>
+        <p class="sub">Based on your recent mood logs</p>
+        <div id="insightsContent"></div>
+      </div>
+
+      <!-- Mood History -->
+      <div class="card">
+        <h3>Your Mood History</h3>
+        <p class="sub">Recent check-ins with detailed context</p>
+        <div id="moodHistory"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MOBILE BAR -->
+  <div class="mobile-bar">
+    <a href="journey.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+    <a href="meditation.html" class="nav-item"><i class="fas fa-spa"></i>Meditate</a>
+    <a href="games.html" class="nav-item"><i class="fas fa-gamepad"></i>Games</a>
+    <a href="journal.html" class="nav-item"><i class="fas fa-pen"></i>Journal</a>
+  </div>
+
+  <script src="mood-tracker.js"></script>
+</body>
+
+</html>

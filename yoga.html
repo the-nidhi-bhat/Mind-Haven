@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="auth.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoga & Flow | Mindful Haven</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="yoga.css">
+</head>
+
+<body>
+
+  <!-- Background Ambience -->
+  <div class="bg-mesh"></div>
+  <div class="grain-overlay"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+
+
+  <nav>
+    <a href="dashboard.html" class="logo">
+      <i class="fas fa-spa"></i> Mindful Haven
+    </a>
+    <ul class="nav-links">
+      <li><a href="journey.html">Home</a></li>
+      <li><a href="journal.html">Journal</a></li>
+      <li><a href="counselors.html">Counselors</a></li>
+      <li><a href="yoga.html" class="active">Yoga</a></li>
+      <li><a href="meditation.html" class="support-pill">Meditate</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle">
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-15a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zM5.64 7.05a1 1 0 0 1 0 1.41l-1.42 1.42a1 1 0 1 1-1.41-1.41L4.22 7.05a1 1 0 0 1 1.42 0zm14.14 10l1.42 1.42a1 1 0 0 1-1.41 1.41l-1.42-1.42a1 1 0 0 1 1.41-1.41zM7.05 18.36a1 1 0 0 1 0-1.41l1.42-1.42a1 1 0 1 1 1.41 1.41l-1.42 1.42a1 1 0 0 1-1.41 0zM18.36 5.64a1 1 0 0 1-1.41 0l-1.42-1.42a1 1 0 0 1 1.41-1.41l1.42 1.42a1 1 0 0 1 0 1.41zM3 12a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2H4a1 1 0 0 1-1-1zm16 0a1 1 0 0 1 1-1h2a1 1 0 0 1 0 2h-2a1 1 0 0 1-1-1z" />
+        </svg>
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M21.64 13.39a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.6 8.6 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 0 0-4.74 7.5 10 10 0 0 0 10 10 10.14 10.14 0 0 0 7.5-4.74 1 1 0 0 0-.12-1.73z" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="hero-container">
+    <div class="botanical-left"></div>
+    <div class="botanical-right"></div>
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+      <p>✨ Find your flow 🧘‍♀️ ✨</p>
+    </div>
+    <div class="title">Breathe & Flow</div>
+    <div class="subtitle">Mindful moments in nature</div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="grid">
+      <!-- Timer -->
+      <div class="card">
+        <h4>Meditation Timer</h4>
+        <div class="timer-display" id="timer">00:00</div>
+        <div class="controls">
+          <button class="ctrl-btn" onclick="startTimer(3)">3m</button>
+          <button class="ctrl-btn" onclick="startTimer(7)">7m</button>
+          <button class="ctrl-btn" onclick="startTimer(15)">15m</button>
+          <button class="ctrl-btn" onclick="stopTimer()">Stop</button>
+        </div>
+      </div>
+
+      <!-- Breath -->
+      <div class="card">
+        <h4>Breath Cycle</h4>
+        <div class="breath-widget">
+          <div class="breath-circle" id="breathCircle"></div>
+          <div class="breath-label" id="breathText">4</div>
+        </div>
+        <div class="controls">
+          <button class="ctrl-btn" id="breathBtn" onclick="toggleBreath()">Begin</button>
+          <button class="ctrl-btn" onclick="resetBreath()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Poses -->
+    <div class="pose-list">
+
+      <!-- Pose 1 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371487711-791519f3-638c-4044-86d7-38de3a8e94f0.webp"
+          class="pose-thumb" alt="Downward Dog">
+        <div class="pose-info">
+          <h3>Downward Dog</h3>
+          <span class="pose-type">Inversion • Strength</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-dog')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-dog">
+            <iframe src="https://www.youtube.com/embed/Y0GDgQqt-bA?si=c8AHOv1tAMOEf1M-" title="Downward Dog"
+              allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Start on hands and knees</p>
+            <p>Tuck toes, lift hips upward</p>
+            <p>Press heels toward the floor</p>
+            <p>Keep spine long, head relaxed</p>
+            <p>Hold for 5-10 breaths</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Strengthens arms and legs</p>
+            <p>Stretches hamstrings and calves</p>
+            <p>Calms the mind, relieves stress</p>
+            <p>Improves digestion</p>
+            <p>Energizes the entire body</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 2 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371533040-46d513c1-c282-4c1c-9ce2-9dce77f913d3.webp"
+          class="pose-thumb" alt="Warrior II">
+        <div class="pose-info">
+          <h3>Warrior II</h3>
+          <span class="pose-type">Standing • Strength</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-warrior')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-warrior">
+            <iframe src="https://www.youtube.com/embed/Mc-38vuwE1Y?si=Oflr4JWXEk80BBhL" title="Warrior II"
+              allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Stand with feet wide apart</p>
+            <p>Turn right foot out 90 degrees</p>
+            <p>Bend right knee over ankle</p>
+            <p>Extend arms parallel to floor</p>
+            <p>Gaze over right fingertips</p>
+            <p>Hold for 5-8 breaths each side</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Builds leg and core strength</p>
+            <p>Improves balance and stability</p>
+            <p>Opens hips and chest</p>
+            <p>Increases stamina</p>
+            <p>Promotes mental focus</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 3 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371703034-d16741f2-c5c4-42d0-9d85-f97c6e4619cb.webp"
+          class="pose-thumb" alt="Tree Pose">
+        <div class="pose-info">
+          <h3>Tree Pose</h3>
+          <span class="pose-type">Balance • Focus</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-tree')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-tree">
+            <iframe src="https://www.youtube.com/embed/e1lz1arUeWc" title="Tree Pose" allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Stand tall with feet together</p>
+            <p>Shift weight to left foot</p>
+            <p>Place right foot on inner left thigh</p>
+            <p>Bring hands to heart center</p>
+            <p>Find a focal point to gaze at</p>
+            <p>Hold for 5-10 breaths each side</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Improves balance and coordination</p>
+            <p>Strengthens ankles and legs</p>
+            <p>Calms the mind, reduces anxiety</p>
+            <p>Enhances concentration</p>
+            <p>Improves posture and alignment</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 4 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371768086-e606f356-5740-4338-aebe-0d8eea2c4b49.jpg"
+          class="pose-thumb" alt="Cobra Pose">
+        <div class="pose-info">
+          <h3>Cobra Pose</h3>
+          <span class="pose-type">Backbend • Heart Opener</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-cobra')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-cobra">
+            <iframe src="https://www.youtube.com/embed/AIOhZsdULNQ" title="Cobra Pose" allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Lie face down, legs extended</p>
+            <p>Place hands under shoulders</p>
+            <p>Press tops of feet into floor</p>
+            <p>Inhale, lift chest upward</p>
+            <p>Keep elbows slightly bent</p>
+            <p>Hold for 3-5 breaths</p>
+            <p>Release slowly on exhale</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Strengthens the spine</p>
+            <p>Opens the chest and lungs</p>
+            <p>Improves posture</p>
+            <p>Stretches abdominal muscles</p>
+            <p>Relieves stress and fatigue</p>
+            <p>Stimulates abdominal organs</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 5 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371801884-a9a95ab0-9d46-4c7b-9602-d27085f156eb.png"
+          class="pose-thumb" alt="Child's Pose">
+        <div class="pose-info">
+          <h3>Child's Pose</h3>
+          <span class="pose-type">Resting • Gentle</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-child')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-child">
+            <iframe src="https://www.youtube.com/embed/WzeefjCL0dM" title="Child's Pose" allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Kneel on floor, big toes touching</p>
+            <p>Sit back on heels, knees apart</p>
+            <p>Fold forward, rest forehead on mat</p>
+            <p>Extend arms forward or alongside body</p>
+            <p>Relax shoulders, breathe deeply</p>
+            <p>Hold as long as comfortable</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Gently stretches hips and thighs</p>
+            <p>Calms the nervous system</p>
+            <p>Relieves stress and anxiety</p>
+            <p>Eases back and neck pain</p>
+            <p>Promotes relaxation and surrender</p>
+            <p>Restores energy when tired</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 6 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371846072-134eae13-6ed2-46dc-a281-5e94b26006a5.jpg"
+          class="pose-thumb" alt="Bridge Pose">
+        <div class="pose-info">
+          <h3>Bridge Pose</h3>
+          <span class="pose-type">Backbend • Energizing</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-bridge')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-bridge">
+            <iframe src="https://www.youtube.com/embed/XUcAuYd7VU0?si=V0L2j_x__f1kLdMC" title="Bridge Pose"
+              allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Lie on back, knees bent</p>
+            <p>Feet hip-width apart, near glutes</p>
+            <p>Arms alongside body, palms down</p>
+            <p>Inhale, lift hips toward ceiling</p>
+            <p>Roll shoulders under, clasp hands</p>
+            <p>Hold for 5-10 breaths</p>
+            <p>Release slowly, vertebra by vertebra</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Strengthens back and glutes</p>
+            <p>Opens chest and shoulders</p>
+            <p>Stretches hip flexors</p>
+            <p>Improves spinal flexibility</p>
+            <p>Calms the brain, reduces anxiety</p>
+            <p>Helps with mild depression</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+      <!-- Pose 7 -->
+      <div class="pose-card">
+        <img src="https://image2url.com/r2/default/images/1768371864040-7edd8e56-b049-488e-bd57-f6c382ecd020.jpg"
+          class="pose-thumb" alt="Seated Forward Bend">
+        <div class="pose-info">
+          <h3>Seated Forward Bend</h3>
+          <span class="pose-type">Forward Fold • Calming</span>
+          <button class="demo-btn" onclick="toggleVideo('vid-fold')"><i class="fas fa-play"></i> Watch Demo</button>
+
+          <div class="video-container" id="vid-fold">
+            <iframe src="https://www.youtube.com/embed/SLIaql7h6RQ?si=I1wGrTVqGm5HtKOV" title="Seated Forward Bend"
+              allowfullscreen></iframe>
+          </div>
+
+          <div class="pose-steps">
+            <h5>Steps:</h5>
+            <p>Sit with legs extended forward</p>
+            <p>Flex feet, engage thigh muscles</p>
+            <p>Inhale, lengthen spine upward</p>
+            <p>Exhale, hinge from hips forward</p>
+            <p>Hold shins, ankles, or feet</p>
+            <p>Keep spine long, don't round back</p>
+            <p>Hold for 5-10 deep breaths</p>
+          </div>
+
+          <div class="pose-benefits">
+            <h5>Benefits:</h5>
+            <p>Stretches entire back body</p>
+            <p>Calms the mind and nervous system</p>
+            <p>Relieves stress and mild depression</p>
+            <p>Stimulates liver and kidneys</p>
+            <p>Improves digestion</p>
+            <p>Helps relieve menopause symptoms</p>
+            <p>Reduces fatigue and anxiety</p>
+          </div>
+        </div>
+        <label class="check-container">
+          <input type="checkbox" style="display:none;" class="pose-check">
+          <div class="check-box"></div>
+        </label>
+      </div>
+
+    </div>
+
+    <!-- Goal -->
+    <div class="progress-line">
+      <div class="progress-fill" id="progFill"></div>
+    </div>
+    <div class="goal-text" id="goalText">Daily Goal: 0/7 poses</div>
+
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="dashboard.html" class="back-btn">
+        <i class="fas fa-home"></i> Return to Dashboard
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="bottom-nav">
+    <a href="journey.html"><i class="fas fa-home"></i>Home</a>
+    <a href="journal.html"><i class="fas fa-book"></i>Journal</a>
+    <a href="yoga.html"><i class="fas fa-spa"></i>Yoga</a>
+    <a href="counselors.html"><i class="fas fa-comments"></i>Counselors</a>
+  </div>
+
+  <script src="yoga.js"></script>
+</body>
+
+</html>

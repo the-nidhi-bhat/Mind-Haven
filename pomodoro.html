@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Timer - Pomodoro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="pomodoro.css">
+</head>
+
+<body>
+    <!-- BACK BUTTON -->
+    <a href="journey.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </a>
+
+
+    <div class="mindful-buddies"></div>
+    <div class="affirmation-bubble">
+        <p>✨ Focus time! You got this! ⏱️ ✨</p>
+    </div>
+
+    <!-- POMODORO TIMER -->
+    <div class="glass-card">
+        <div class="top-icons">
+            <i class="fas fa-check-square icon-btn" onclick="openTodo()" title="Tasks"></i>
+            <i class="fas fa-chart-bar icon-btn" onclick="openReport()" title="Stats"></i>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchMode('pomo')" id="btn-pomo">Focus</button>
+            <button class="tab-btn" onclick="switchMode('short')" id="btn-short">Short</button>
+            <button class="tab-btn" onclick="switchMode('long')" id="btn-long">Long</button>
+        </div>
+
+        <div class="timer-row">
+            <div class="timer-display" id="timer">25:00</div>
+            <div id="tree-container"><span id="tree-icon" class="pixel-tree">🌱</span></div>
+        </div>
+
+        <div class="task-container">
+            <input type="text" class="task-input" id="mainTaskInput" placeholder="What are you working on?" />
+        </div>
+
+        <div class="japanese-controls">
+            <button class="jp-btn btn-kaizen" onclick="activateKaizen()">
+                <span class="jp-title"><i class="fas fa-bolt"></i> Kaizen</span>
+                <span class="jp-desc">Overcome laziness. Start with 1 min.</span>
+            </button>
+            <button class="jp-btn btn-shinrin" onclick="activateShinrin()">
+                <span class="jp-title"><i class="fas fa-leaf"></i> Shinrin-yoku</span>
+                <span class="jp-desc">Lower stress. Forest immersion.</span>
+            </button>
+        </div>
+
+        <button class="btn-main" id="mainBtn" onclick="toggleTimer()">Start Session</button>
+
+        <div class="controls-grid">
+            <div class="music-wrapper">
+                <i class="fas fa-music"></i>
+                <select class="dropdown-style" id="trackSelect" onchange="changeTrack()">
+                    <option value="none">No Music</option>
+                    <option value="lofi1">Lofi Chill</option>
+                    <option value="lofi2">Lofi Jazz</option>
+                </select>
+                <i class="fas fa-play" id="playIcon" onclick="toggleMusic()"
+                    style="cursor:pointer; margin-left:auto;"></i>
+            </div>
+
+            <div class="nature-toggles">
+                <div class="nature-btn-group">
+                    <button class="nature-btn" onclick="toggleNature('rain', this)"><i
+                            class="fas fa-cloud-rain"></i></button>
+                    <div class="vol-slider-container">
+                        <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="0.5" orient="vertical"
+                            oninput="setVolume('rain', this.value)" />
+                    </div>
+                </div>
+                <div class="nature-btn-group">
+                    <button class="nature-btn" onclick="toggleNature('forest', this)"><i
+                            class="fas fa-tree"></i></button>
+                    <div class="vol-slider-container">
+                        <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="0.5" orient="vertical"
+                            oninput="setVolume('forest', this.value)" />
+                    </div>
+                </div>
+                <div class="nature-btn-group">
+                    <button class="nature-btn" onclick="toggleNature('fire', this)"><i class="fas fa-fire"></i></button>
+                    <div class="vol-slider-container">
+                        <input type="range" class="vol-slider" min="0" max="1" step="0.1" value="0.5" orient="vertical"
+                            oninput="setVolume('fire', this.value)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BACKGROUND PICKER -->
+    <div class="bg-picker">
+        <div class="bg-dot"
+            onclick="changeBg('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070&auto=format&fit=crop')"
+            style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=100&auto=format&fit=crop');">
+        </div>
+        <div class="bg-dot"
+            onclick="changeBg('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=2070&auto=format&fit=crop')"
+            style="background-image: url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=100&auto=format&fit=crop');">
+        </div>
+        <div class="bg-dot"
+            onclick="changeBg('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2070&auto=format&fit=crop')"
+            style="background-image: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=100&auto=format&fit=crop');">
+        </div>
+        <div class="bg-dot"
+            onclick="changeBg('https://images.unsplash.com/photo-1493314894560-5c412a56c17c?q=80&w=2070&auto=format&fit=crop')"
+            style="background-image: url('https://images.unsplash.com/photo-1493314894560-5c412a56c17c?q=80&w=100&auto=format&fit=crop');">
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="reportModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="report-tabs">
+                    <div class="report-tab active" onclick="switchView('summary', this)">Summary</div>
+                    <div class="report-tab" onclick="switchView('detail', this)">Log</div>
+                </div>
+                <i class="fas fa-times close-modal" onclick="closeModals()"></i>
+            </div>
+            <div class="modal-content">
+                <div id="view-summary">
+                    <div class="summary-row">
+                        <div class="summary-card">
+                            <span class="sum-val" id="disp-hours">0.0</span>
+                            <span class="sum-label">Hours</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="sum-val" id="disp-days">0</span>
+                            <span class="sum-label">Days</span>
+                        </div>
+                        <div class="summary-card">
+                            <span class="sum-val" id="disp-streak">0</span>
+                            <span class="sum-label">Streak</span>
+                        </div>
+                    </div>
+                    <h4>Focus Activity</h4>
+                    <div class="chart-wrapper">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+                <div id="view-detail" style="display:none">
+                    <ul id="logList" style="list-style:none"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="todoModal">
+        <div class="modal-card" style="height: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-check-circle" style="color:#f472b6;"></i> Tasks
+                </div>
+                <i class="fas fa-times close-modal" onclick="closeModals()"></i>
+            </div>
+            <div class="modal-content">
+                <div class="todo-input-row">
+                    <input type="text" class="todo-input" id="newTodoInput" placeholder="Add a new task..."
+                        onkeypress="if(event.key==='Enter') addTodo()">
+                    <button class="todo-add-btn" onclick="addTodo()">Add</button>
+                </div>
+                <ul class="todo-list" id="todoListUI"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO FILES -->
+    <audio id="music-lofi1" loop
+        src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+    <audio id="music-lofi2" loop
+        src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lofi-chill-medium-version-159456.mp3"></audio>
+    <audio id="nature-rain" loop src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg"></audio>
+    <audio id="nature-forest" loop src="https://actions.google.com/sounds/v1/ambiences/forest.ogg"></audio>
+    <audio id="nature-fire" loop src="https://actions.google.com/sounds/v1/ambiences/fireplace.ogg"></audio>
+    <audio id="alarm-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+
+    <script src="pomodoro.js"></script>
+</body>
+
+</html>
